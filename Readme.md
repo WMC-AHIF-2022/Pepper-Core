@@ -4,15 +4,11 @@
 
 ### 1.1. Ist-Situation
 
-- Siehe Projektantrag
+Es gibt einen Roboter namens "Pepper" und dazu wollen wir eine neue Funktion programmieren. Diese Erweiterung sollte eine Personenverwaltung sein, wo wir den Roboter miteinbinden wollen. Diese App sollte als Administration dienen, um eine Übersicht über alle eingetragenen Menschen zu haben und dazu gibt es noch ein paar extra Features.
 
-### 1.2. Verbesserungspotenziale
+### 1.2. Zielsetzung
 
-- Siehe Projektantrag
-
-### 1.3. Zielsetzung
-
-- Siehe Projektantrag
+Unser Ziel ist, dass wir eine gute funktionelle App entwickeln, die einen sinnvollen Nutzen besitzt, verwendet wird und Kunden weiterhelfen kann. Ebenso sollte sie auch zu einer besseren Übersicht der Administration führen.
 
 ## 2. Funktionale Anforderungen
 
