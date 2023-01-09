@@ -19,16 +19,16 @@
 
 ### 2.1. Use Case Überblick
 
-<img src="USE-CASE-DIAGRAM.PNG">
+<img src="./Person Manager For Pepper/USE-CASE-DIAGRAM.PNG">
 
 ### Startseite der Webseite
-<img src="Index.PNG">
+<img src="./Person Manager For Pepper/Index.PNG">
 
 ### 2.2. Use Case Ansicht von Personen
 
 #### 2.2.1 GUI-Design
 
-<img src="./USE-CASE-1.PNG">
+<img src="./Person Manager For Pepper/USE-CASE-1.PNG">
 
 #### 2.2.2 Workflow
 
@@ -38,7 +38,7 @@ Der User oder Roboter kann auf der Index Seite auf "All Users" klicken und sieht
 
 #### 2.3.1 GUI-Design
 
-<img src="./USE-CASE-4.PNG">
+<img src="./Person Manager For Pepper/USE-CASE-4.PNG">
 
 #### 2.3.2 Workflow
 
@@ -48,7 +48,7 @@ Nach dem ersten Use Case kann man dann auf verschieden Personen klicken und komm
 
 #### 2.4.1 GUI-Design
 
-<img src="./USE-CASE-2.PNG">
+<img src="./Person Manager For Pepper/USE-CASE-2.PNG">
 
 #### 2.4.2 Workflow
 
@@ -58,7 +58,7 @@ Nur der User kann Personen editieren. Dazu muss er sich einloggen. Er kann nur s
 
 #### 2.5.1 GUI-Design
 
-<img src="./USE-CASE-3.PNG">
+<img src="./Person Manager For Pepper/USE-CASE-3.PNG">
 
 #### 2.5.2 Workflow
 
@@ -110,4 +110,4 @@ Ein User kann nur eine Person erstellen die dann zu seinem Profil hinzugefügt w
 
 ## 5. Systemarchitektur
 
-<img src="./Systemarchitektur.PNG">
+<img src="./Person Manager For Pepper/Systemarchitektur.PNG">
