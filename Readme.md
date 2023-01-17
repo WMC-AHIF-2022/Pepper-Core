@@ -17,7 +17,7 @@ Wenn der Benutzer auf die Webseite kommt sieht man eine Liste von aller vorhande
 
 Die REST-API speichert die Daten auf eine Datenbank. Von dortaus bekommt sie auch die Daten wieder. Die REST-API ist nur die Schnittstelle zwischen Benutzer,Roboter und Datenbank.
 
-<img src="./Person_Manager_for_Pepper/MindMap.PNG" alt="Mind Map" title="Mind Map" />
+<img src="./Person-Manager-for-Pepper/MindMap.PNG" alt="Mind Map" title="Mind Map" />
 
 ## 2. Funktionale Anforderungen
 
