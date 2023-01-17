@@ -17,7 +17,7 @@ Wenn der Benutzer auf die Webseite kommt sieht man eine Liste von aller vorhande
 
 Die REST-API speichert die Daten auf eine Datenbank. Von dortaus bekommt sie auch die Daten wieder. Die REST-API ist nur die Schnittstelle zwischen Benutzer,Roboter und Datenbank.
 
-<img src="./Person Manager for Pepper/MindMap.PNG" alt="Mind Map" title="Mind Map" />
+<img src="./Person Manager For Pepper/MindMap.PNG" alt="Mind Map" title="Mind Map" />
 
 ## 2. Funktionale Anforderungen
 
@@ -29,6 +29,12 @@ Die REST-API speichert die Daten auf eine Datenbank. Von dortaus bekommt sie auc
 ### Startseite der Webseite
 <img src="./Person Manager For Pepper/Index.PNG">
 
+Auf unserer Startseite hat man in der Navigation-Bar 3 verschieden Buttons. Einmal Home-Page um immer auf die Startseite zurückzulangen.
+Daneben About-Us um mehr über die Ersteller dieser Webseite zu erfahren. Und abschließend ein Login/Sign up um sich anzumelden oder neu registrieren.
+Darunter ist ein kleiner Einführungstext über die Webseite und 3 größe Buttons. Der Buttons All Users führt einen zu einer neuen Seite wo im alle vorhandenen User angezeigt werden.
+Der Button Edit User führt in zu einer Seite wo er seine eigenen Daten ändern kann, sofern er schon einen hat.
+Der letzte Button Create User lässt den User einen ganz neuen User erstellen.
+
 ### 2.2. Use Case Ansicht von Personen
 
 #### 2.2.1 GUI-Design
@@ -38,6 +44,7 @@ Die REST-API speichert die Daten auf eine Datenbank. Von dortaus bekommt sie auc
 #### 2.2.2 Workflow
 
 Der User oder Roboter kann auf der Index Seite auf "All Users" klicken und sieht dann eine Liste mit allen angelegten Personen.
+Durch einen Klick auf eine Person erhält er die Daten und Informationen des jeweiligen Users. Jeder User kann die Daten der anderen User sehen, aber nicht verändern.
 
 ### 2.3. Use Case View Person
 
@@ -47,7 +54,8 @@ Der User oder Roboter kann auf der Index Seite auf "All Users" klicken und sieht
 
 #### 2.3.2 Workflow
 
-Nach dem ersten Use Case kann man dann auf verschieden Personen klicken und kommt dann auf deren Profil. Auf dieser Seite sieht man dann verschieden Daten der Person inklusive Bild und abspielbaren Audio-File.
+Diese Seite erscheint wenn der User auf einen anderen User geklickt hat um sich seine Daten anzuschauen. 
+Der User sieht unter anderen seinen Namen, ein optionales Bild, das Geburtsdatum, das Geschlecht und vielleicht noch ein Audio file des Users.
 
 ### 2.4. Use Case Edit Person
 
@@ -57,7 +65,9 @@ Nach dem ersten Use Case kann man dann auf verschieden Personen klicken und komm
 
 #### 2.4.2 Workflow
 
-Nur der User kann Personen editieren. Dazu muss er sich einloggen. Er kann nur sich selber editieren aber trotzdem alle anderen sehen. 
+Es gibt auch noch die Möglichkeit, um seine eigenen Daten zu bearbeiten. Nur der User kann sich selbst editieren und sonst kein anderer.
+Dazu muss er sich einloggen. Er hat nur die Berechtigung für sich selbst, kann aber die Daten und Informationen der anderen User sehen.
+Der Sinn dahinter ist, dass man zum Beispiel ein neues Audio file hinzufügt, oder das Bild statt einem aktuellem Bild austauscht.
 
 ### 2.5. Use Case Create Person
 
@@ -67,9 +77,8 @@ Nur der User kann Personen editieren. Dazu muss er sich einloggen. Er kann nur s
 
 #### 2.5.2 Workflow
 
-Ein User kann nur eine Person erstellen die dann zu seinem Profil hinzugefügt wird. Der User kann dann keine neue Person erstellen und nur sich selber editieren.
-
-
+Wenn der User auf der Home-Page create User gedrückt hat und sich davor noch eingologt hat kann er auch eine neue Person mit seinen eigenen Daten anlegen. 
+Er muss Vorname, Nachname, Geburtsdatum und Gender eintragen. Er kann optional auch noch ein Bild von sich einfügen und auch noch ein Audio file.
 
 ## 3. Nicht-funktionale Anforderungen
 
