@@ -26,16 +26,8 @@ Die REST-API speichert die Daten auf eine Datenbank. Von dortaus bekommt sie auc
 
 <img src="./Person Manager For Pepper/USE-CASE-DIAGRAM.PNG">
 
-### Startseite der Webseite
-<img src="./Person Manager For Pepper/Index.PNG">
 
-Auf unserer Startseite hat man in der Navigation-Bar 3 verschieden Buttons. Einmal Home-Page um immer auf die Startseite zurückzulangen.
-Daneben About-Us um mehr über die Ersteller dieser Webseite zu erfahren. Und abschließend ein Login/Sign up um sich anzumelden oder neu registrieren.
-Darunter ist ein kleiner Einführungstext über die Webseite und 3 größe Buttons. Der Buttons All Users führt einen zu einer neuen Seite wo im alle vorhandenen User angezeigt werden.
-Der Button Edit User führt in zu einer Seite wo er seine eigenen Daten ändern kann, sofern er schon einen hat.
-Der letzte Button Create User lässt den User einen ganz neuen User erstellen.
-
-### 2.2. Use Case Ansicht von Personen
+### 2.2. Use Case Ansicht von allen Personen
 
 #### 2.2.1 GUI-Design
 
@@ -43,10 +35,12 @@ Der letzte Button Create User lässt den User einen ganz neuen User erstellen.
 
 #### 2.2.2 Workflow
 
-Der User oder Roboter kann auf der Index Seite auf "All Users" klicken und sieht dann eine Liste mit allen angelegten Personen.
-Durch einen Klick auf eine Person erhält er die Daten und Informationen des jeweiligen Users. Jeder User kann die Daten der anderen User sehen, aber nicht verändern.
+Auf unserer Startseite gibt es ganz oben eine Navigationsbar mit einer About Us Section und 
+es gibt die Möglichkeit sich einzuloggen. Ebenso werden auch alle registrierten Personen angezeigt
+und mit dem Plus Button kann man Personen hinzufügen. Wenn man auf den Button Details neben einer
+Person klickt, dann kommt man zu den Daten der einzelnen Personen.
 
-### 2.3. Use Case View Person
+### 2.3. Use Case Create User
 
 #### 2.3.1 GUI-Design
 
@@ -54,10 +48,9 @@ Durch einen Klick auf eine Person erhält er die Daten und Informationen des jew
 
 #### 2.3.2 Workflow
 
-Diese Seite erscheint wenn der User auf einen anderen User geklickt hat um sich seine Daten anzuschauen. 
-Der User sieht unter anderen seinen Namen, ein optionales Bild, das Geburtsdatum, das Geschlecht und vielleicht noch ein Audio file des Users.
+Wenn der User auf der Startseite auf das Plus gedrückt hat kann er einen neuen User erstellen wenn er sich davor eingeloggt hat. Er muss Vorname, Nachname, Geburtsdatum und Gender eintragen. Er kann optional auch noch ein Bild von sich einfügen und auch noch ein Audio file. Das Bild und Audiofile werden per Drag&Drop Box hinzugefügt.
 
-### 2.4. Use Case Edit Person
+### 2.4. Use Case View, Edit & Delete Person
 
 #### 2.4.1 GUI-Design
 
@@ -65,11 +58,12 @@ Der User sieht unter anderen seinen Namen, ein optionales Bild, das Geburtsdatum
 
 #### 2.4.2 Workflow
 
-Es gibt auch noch die Möglichkeit, um seine eigenen Daten zu bearbeiten. Nur der User kann sich selbst editieren und sonst kein anderer.
-Dazu muss er sich einloggen. Er hat nur die Berechtigung für sich selbst, kann aber die Daten und Informationen der anderen User sehen.
-Der Sinn dahinter ist, dass man zum Beispiel ein neues Audio file hinzufügt, oder das Bild statt einem aktuellem Bild austauscht.
+Durch das Klicken auf den Details Button auf der Startseite kommt man zu den Daten der ausgewählten Person.
+Mann kann unteranderm den Namen der Person sehen, ein optionales Bild, das Geburtsadtum, das Geschlecht udn vielleicht noch ein Audio file.
+Mithilfe des Edit Buttons kann die Person bearbeitet werden um zum Beispiel ein neues Audio file hinzufügen zu können. Das Bild und Audiofile werden per Drag&Drop Box hinzugefügt oder geändert.
+Durch den Delete Button kann die ausgewählte Person gelöscht werden und die Person kann nur ihren eigenen User löschen und editieren. 
 
-### 2.5. Use Case Create Person
+### 2.5. Use Case Login/Sign up
 
 #### 2.5.1 GUI-Design
 
@@ -77,8 +71,8 @@ Der Sinn dahinter ist, dass man zum Beispiel ein neues Audio file hinzufügt, od
 
 #### 2.5.2 Workflow
 
-Wenn der User auf der Home-Page create User gedrückt hat und sich davor noch eingologt hat kann er auch eine neue Person mit seinen eigenen Daten anlegen. 
-Er muss Vorname, Nachname, Geburtsdatum und Gender eintragen. Er kann optional auch noch ein Bild von sich einfügen und auch noch ein Audio file.
+Um einen eigenen User zu erstellen muss man sich einen Account erstellen. Man muss Benutzername und Passwort angeben. Man muss sich dann jedesmal neu einloggen um seinen bestehenden User zu editen.
+
 
 ## 3. Nicht-funktionale Anforderungen
 
