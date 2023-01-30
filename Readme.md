@@ -4,6 +4,10 @@
 
 ### 1.1. Ist-Situation
 
+!!!
+Ist-Situation und Zielsetzung kann nicht geupdatet werden da Prof. Steiner uns keine Antwort geben konnte und wir sich mit ihm einen Termin ausmachen um das alles zu besprechen.
+!!!
+
 An der Schule der HTL Leonding gibt es einen selbstdesignedn Roboter names "Pepper". Der Roboter steht den ganzen Tag nur herum.
 Um genauer zu sein steht in einer Ecke in einem Programmiersaal. 
 Und wir wollen das ändern. Wir wollen dem Roboter ein neues Feature hinzufügen, damit er öfter genutzt wird.
