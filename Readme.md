@@ -123,3 +123,7 @@ Um einen eigenen User zu erstellen muss man sich einen Account erstellen. Man mu
 ## 5. Systemarchitektur
 
 <img src="./Person Manager For Pepper/Systemarchitektur.PNG">
+
+## 6. Datenmodell
+
+<img src="./Person Manager For Pepper/Datenmodell.PNG">
