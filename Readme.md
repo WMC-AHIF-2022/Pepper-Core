@@ -4,20 +4,9 @@
 
 ### 1.1. Ist-Situation
 
-!!!
-Ist-Situation und Zielsetzung kann nicht geupdatet werden da Prof. Steiner uns keine Antwort geben konnte und wir sich mit ihm einen Termin ausmachen um das alles zu besprechen.
-!!!
-
-An der Schule der HTL Leonding gibt es einen selbstdesignedn Roboter names "Pepper". Der Roboter steht den ganzen Tag nur herum.
-Um genauer zu sein steht in einer Ecke in einem Programmiersaal. 
-Und wir wollen das ändern. Wir wollen dem Roboter ein neues Feature hinzufügen, damit er öfter genutzt wird.
-Wir wollen eine Personenverwaltung über den Roboter ausgeben. Der Hauptteil geschieht auf er Webseite und die Ausgabe der Daten soll über den Roboter geschiehen. Das Program hat auch ein eher lustiges Feature, da man bei der Personenverwaltung ein Audiofile mitgeben kann, dass dann über den Roboter ausgegeben werden kann.
-
 ### 1.2. Zielsetzung
 
-Unser Ziel ist es, dass wir eine gut funktionelle, aber doch auch an manchen Stellen eine witzige Webseite programmieren, damit der Roboter attraktiver für die Schüler der HTL-Leonding wird und nicht nur im Programmiersaal in der Ecke steht.
-
-Wenn der Benutzer auf die Webseite kommt sieht man eine Liste von aller vorhandene Personen. Man kann dann vorhandene Personen auswählen oder neue Personen erstellen. Wenn man eine neue Person erstellt kommt eine Eingabe mit Vorname, Nachname, Geschlecht und Geburtsdatum. Dazu kann man Bilder der Person oder Audiofiles wie zum Beispiel den Lieblingssong der Person hinzufügen. Diese Informationen werden per POST-Befehl auf die REST-API hochgeladen. Wenn eine schon vorhandene Person ausgewählt wird, kann man sich die Person anzeigen lassen indem man mit dem GET-Befehl die Daten von der REST-API bekommt. Um neue Bilder oder Audio-Files hinzuzufügen muss man diese mit dem PUT-Befehl ändern.
+Wenn der Benutzer auf die Webseite kommt sieht man eine Liste von aller vorhandene Personen. Man kann dann vorhandene Personen auswählen oder neue Personen erstellen. Wenn man eine neue Person erstellt kommt eine Eingabe mit Vorname, Nachname, Geschlecht und Geburtsdatum. Dazu kann man Bilder der Person hinzufügen. Diese Informationen werden per POST-Befehl auf die REST-API hochgeladen. Wenn eine schon vorhandene Person ausgewählt wird, kann man sich die Person anzeigen lassen indem man mit dem GET-Befehl die Daten von der REST-API bekommt. Um neue Bilder hinzuzufügen muss man diese mit dem PUT-Befehl ändern.
 
 Die REST-API speichert die Daten auf eine Datenbank. Von dortaus bekommt sie auch die Daten wieder. Die REST-API ist nur die Schnittstelle zwischen Benutzer,Roboter und Datenbank.
 
