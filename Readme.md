@@ -4,7 +4,12 @@
 
 ### 1.1. Ist-Situation
 
+An der Schule der HTL Leonding gibt es einen Roboter namens "Pepper". Dieser besitzt einige Features und
+wir wollen ein neues Features entwickeln, um den Menschen im Altersheim eine neue Beschäftigung zu bieten.
+
 ### 1.2. Zielsetzung
+
+Unser Ziel ist es ein weiteres Feature für den Roboter zu entwickeln. Diese Idee sollte eine Memmory sein, damit zum Beispiel die Menschen im Altersheim sich an ihre alten Fotos auf spielerische Art erinnern können.
 
 Wenn der Benutzer auf die Webseite kommt sieht man eine Liste von aller vorhandene Personen. Man kann dann vorhandene Personen auswählen oder neue Personen erstellen. Wenn man eine neue Person erstellt kommt eine Eingabe mit Vorname, Nachname, Geschlecht und Geburtsdatum. Dazu kann man Bilder der Person hinzufügen. Diese Informationen werden per POST-Befehl auf die REST-API hochgeladen. Wenn eine schon vorhandene Person ausgewählt wird, kann man sich die Person anzeigen lassen indem man mit dem GET-Befehl die Daten von der REST-API bekommt. Um neue Bilder hinzuzufügen muss man diese mit dem PUT-Befehl ändern.
 
@@ -95,17 +100,12 @@ Um einen eigenen User zu erstellen muss man sich einen Account erstellen. Man mu
 - Grundsätzlich kann jeder User ohne erstellten Account die Daten betrachten. Einen eigenen User erstellen oder bearbeiten geht dann nur mit Anmeldung.
 - Wir gewährleisten nicht die Korrektheit der Daten der User. Wenn ein User einen Account erstellt und seine Daten eingibt überprüfen wir nicht die richtigkeit der Daten.
 
-### `Legal`: Gesetzliche Anforderung
-
-- Welche Standards und Gesetze müssen beachtet werden?
-  - //
-
 ## 4. Mengengerüst
 
 - Wieviele User werden erwartet?
-  - Es werden nicht allzu viele User erwartet, da es eher eine schulinterne Webseite ist. Wir rechnen mit 5 - 50 Usern.
+  - Es werden nicht allzu viele User erwartet, da es eher eine interne Webseite ist. Wir rechnen mit 5 - 50 Usern.
 - Wieviele Daten pro User werden erwartet?
-  - Ein User hat 6 Daten. Einmal Vorname, Nachname, Geburtsdatum, Geschlecht, ein Bild der Person und ein Audiofile. Ein User kann aber einen Account nur erstellen wenn er Vorname, Nachname, Geburtsdatum, Geschlecht und Bild angibt. Das Audiofile ist optional.
+  - Ein User hat 5 Daten. Einmal Vorname, Nachname, Geburtsdatum, Geschlecht, ein Bild der Person. Ein User kann aber einen Account nur erstellen wenn er Vorname, Nachname, Geburtsdatum, Geschlecht und Bild angibt.
 - Mit welcher Anfrage-Frequenz wird gerechnet?
   - Wir rechnen mit einer sehr geringen Anfrage-Frequenz, da es eher eine kleingehaltene Webseite ist.
 
