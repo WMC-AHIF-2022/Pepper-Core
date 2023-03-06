@@ -9,7 +9,7 @@ wir wollen ein neues Features entwickeln, um den Menschen im Altersheim eine neu
 
 ### 1.2. Zielsetzung
 
-Unser Ziel ist es ein weiteres Feature für den Roboter zu entwickeln. Diese Idee sollte eine Memmory sein, damit zum Beispiel die Menschen im Altersheim sich an ihre alten Fotos auf spielerische Art erinnern können.
+Unser Ziel ist es ein weiteres Feature für den Roboter zu entwickeln. Diese Idee sollte eine Memory sein, damit zum Beispiel die Menschen im Altersheim sich an ihre alten Fotos auf spielerische Art erinnern können.
 
 Wenn der Benutzer auf die Webseite kommt sieht man eine Liste von aller vorhandene Personen. Man kann dann vorhandene Personen auswählen oder neue Personen erstellen. Wenn man eine neue Person erstellt kommt eine Eingabe mit Vorname, Nachname, Geschlecht und Geburtsdatum. Dazu kann man Bilder der Person hinzufügen. Diese Informationen werden per POST-Befehl auf die REST-API hochgeladen. Wenn eine schon vorhandene Person ausgewählt wird, kann man sich die Person anzeigen lassen indem man mit dem GET-Befehl die Daten von der REST-API bekommt. Um neue Bilder hinzuzufügen muss man diese mit dem PUT-Befehl ändern.
 
@@ -46,7 +46,7 @@ Person klickt, dann kommt man zu den Daten der einzelnen Personen.
 
 #### 2.3.2 Workflow
 
-Wenn der User auf der Startseite auf das Plus gedrückt hat kann er einen neuen User erstellen wenn er sich davor eingeloggt hat. Er muss Vorname, Nachname, Geburtsdatum und Gender eintragen. Er muss auch ein Profilbild von sich einfügen und noch weitere Bilder für die Memmory. Das Profilbild und die Bilder für die Memmory werden per Drag&Drop Box hinzugefügt.
+Wenn der User auf der Startseite auf das Plus gedrückt hat kann er einen neuen User erstellen wenn er sich davor eingeloggt hat. Er muss Vorname, Nachname, Geburtsdatum und Gender eintragen. Er muss auch ein Profilbild von sich einfügen und noch weitere Bilder für die Memory. Das Profilbild und die Bilder für die Memory werden per Drag&Drop Box hinzugefügt.
 
 ### 2.4. Use Case View, Edit & Delete Person
 
@@ -57,8 +57,8 @@ Wenn der User auf der Startseite auf das Plus gedrückt hat kann er einen neuen 
 #### 2.4.2 Workflow
 
 Durch das Klicken auf den Details Button auf der Startseite kommt man zu den Daten der ausgewählten Person.
-Mann kann unteranderm den Namen der Person sehen, das Profilbild, das Geburtsadtum, das Geschlecht und ihre Bilder für die Memmory.
-Mithilfe des Edit Buttons kann die Person bearbeitet werden um zum Beispiel ein neues Bild zur Memmory hinzufügen. Das Profilbild und die Bilder für die Memmory werden per Drag&Drop Box hinzugefügt oder geändert.
+Mann kann unteranderem den Namen der Person sehen, das Profilbild, das Geburtsadtum, das Geschlecht und ihre Bilder für die Memory.
+Mithilfe des Edit Buttons kann die Person bearbeitet werden um zum Beispiel ein neues Bild zur Memory hinzufügen. Das Profilbild und die Bilder für die Memory werden per Drag&Drop Box hinzugefügt oder geändert.
 Durch den Delete Button kann die ausgewählte Person gelöscht werden und die Person kann nur ihren eigenen User löschen und editieren. 
 
 ### 2.5. Use Case Login/Sign up
