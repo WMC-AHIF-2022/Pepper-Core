@@ -46,7 +46,7 @@ Person klickt, dann kommt man zu den Daten der einzelnen Personen.
 
 #### 2.3.2 Workflow
 
-Wenn der User auf der Startseite auf das Plus gedrückt hat kann er einen neuen User erstellen wenn er sich davor eingeloggt hat. Er muss Vorname, Nachname, Geburtsdatum und Gender eintragen. Er kann optional auch noch ein Bild von sich einfügen und auch noch ein Audio file. Das Bild und Audiofile werden per Drag&Drop Box hinzugefügt.
+Wenn der User auf der Startseite auf das Plus gedrückt hat kann er einen neuen User erstellen wenn er sich davor eingeloggt hat. Er muss Vorname, Nachname, Geburtsdatum und Gender eintragen. Er muss auch ein Profilbild von sich einfügen und noch weitere Bilder für die Memmory. Das Profilbild und die Bilder für die Memmory werden per Drag&Drop Box hinzugefügt.
 
 ### 2.4. Use Case View, Edit & Delete Person
 
@@ -57,8 +57,8 @@ Wenn der User auf der Startseite auf das Plus gedrückt hat kann er einen neuen 
 #### 2.4.2 Workflow
 
 Durch das Klicken auf den Details Button auf der Startseite kommt man zu den Daten der ausgewählten Person.
-Mann kann unteranderm den Namen der Person sehen, ein optionales Bild, das Geburtsadtum, das Geschlecht udn vielleicht noch ein Audio file.
-Mithilfe des Edit Buttons kann die Person bearbeitet werden um zum Beispiel ein neues Audio file hinzufügen zu können. Das Bild und Audiofile werden per Drag&Drop Box hinzugefügt oder geändert.
+Mann kann unteranderm den Namen der Person sehen, das Profilbild, das Geburtsadtum, das Geschlecht und ihre Bilder für die Memmory.
+Mithilfe des Edit Buttons kann die Person bearbeitet werden um zum Beispiel ein neues Bild zur Memmory hinzufügen. Das Profilbild und die Bilder für die Memmory werden per Drag&Drop Box hinzugefügt oder geändert.
 Durch den Delete Button kann die ausgewählte Person gelöscht werden und die Person kann nur ihren eigenen User löschen und editieren. 
 
 ### 2.5. Use Case Login/Sign up
