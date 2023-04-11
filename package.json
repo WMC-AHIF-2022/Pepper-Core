@@ -1,0 +1,19 @@
+{
+  "name": "person-manager-for-pepper",
+  "version": "1.0.0",
+  "description": "An der Schule der HTL Leonding gibt es einen Roboter namens \"Pepper\". Dieser besitzt einige Features und\r wir wollen ein neues Features entwickeln, um den Menschen im Altersheim eine neue Beschäftigung zu bieten.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WMC-AHIF-2022/Person-Manager-for-Pepper.git"
+  },
+  "author": "David Proeller",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WMC-AHIF-2022/Person-Manager-for-Pepper/issues"
+  },
+  "homepage": "https://github.com/WMC-AHIF-2022/Person-Manager-for-Pepper#readme"
+}
