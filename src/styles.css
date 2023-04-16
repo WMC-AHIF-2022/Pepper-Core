@@ -1,0 +1,50 @@
+#XButton{
+    background-color: white;
+}
+h1{
+    text-align: center;
+    font-size: 380%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-color: rgb(5,54,94);
+    background-image: linear-gradient(to bottom,rgb(5,54,94) 40%,rgb(84,188,227) 60%);
+    background-size: cover;
+    background-position: center center;
+}
+.PlusButton {
+    width: 15%;
+    height: 15%;
+    border-radius: 50%;
+}
+.detailsButton{
+    width: 30%;
+    height: 280%;
+    background-color: black;
+    border: 3px solid black;
+    border-radius: 30px;
+    text-align: center;
+    color:white;
+    font-size: 250%;
+}
+.PersonName{
+    font-size: 250%;
+    text-align: center;
+    border: 3px solid black;
+    border-radius: 30px;
+    background-color: black;
+    color: white;
+
+}
+.PersonTable{
+    width: 100%;
+
+}
+td{
+    width: 33%;
+    border: 1px solid white;
+    border-collapse: collapse;
+}
+table{
+    margin-top: 5%;
+    text-align: center;
+}
