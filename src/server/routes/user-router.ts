@@ -1,4 +1,4 @@
-import * as express from 'express';
+import express from "express";
 import {StatusCodes} from "http-status-codes";
 import {addUser, getAllUsers, isAuthorized} from "../data/user-repository";
 import {User} from "../data/user";

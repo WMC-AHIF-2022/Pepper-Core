@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,15 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { Database as Driver } from "sqlite3";
-import { open } from "sqlite";
-export const dbFileName = 'database.db';
-export class DB {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DB = exports.dbFileName = void 0;
+const sqlite3_1 = require("sqlite3");
+const sqlite_1 = require("sqlite");
+exports.dbFileName = 'database.db';
+class DB {
     static createDBConnection() {
         return __awaiter(this, void 0, void 0, function* () {
-            const dbConnection = yield open({
-                filename: `./${dbFileName}`,
-                driver: Driver
+            const dbConnection = yield (0, sqlite_1.open)({
+                filename: `./${exports.dbFileName}`,
+                driver: sqlite3_1.Database
             });
             yield DB.ensureTablesCreated(dbConnection);
             return dbConnection;
@@ -34,3 +37,4 @@ export class DB {
         });
     }
 }
+exports.DB = DB;

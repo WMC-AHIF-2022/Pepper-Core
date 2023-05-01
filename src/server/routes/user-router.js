@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,16 +8,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import * as express from 'express';
-import { StatusCodes } from "http-status-codes";
-import { addUser, getAllUsers, isAuthorized } from "../data/user-repository";
-export const userRouter = express.Router();
-userRouter.post("/signup", function (request, response) {
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.userRouter = void 0;
+const express_1 = __importDefault(require("express"));
+const http_status_codes_1 = require("http-status-codes");
+const user_repository_1 = require("../data/user-repository");
+exports.userRouter = express_1.default.Router();
+exports.userRouter.post("/signup", function (request, response) {
     return __awaiter(this, void 0, void 0, function* () {
         const username = request.body.username;
         const password = request.body.password;
         if (password.trim().length === 0) {
-            response.sendStatus(StatusCodes.BAD_REQUEST);
+            response.sendStatus(http_status_codes_1.StatusCodes.BAD_REQUEST);
             return;
         }
         const user = {
@@ -25,15 +31,15 @@ userRouter.post("/signup", function (request, response) {
             password: password
         };
         try {
-            yield addUser(user);
-            response.sendStatus(StatusCodes.OK);
+            yield (0, user_repository_1.addUser)(user);
+            response.sendStatus(http_status_codes_1.StatusCodes.OK);
         }
         catch (e) {
-            response.sendStatus(StatusCodes.BAD_REQUEST);
+            response.sendStatus(http_status_codes_1.StatusCodes.BAD_REQUEST);
         }
     });
 });
-userRouter.post("/login", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+exports.userRouter.post("/login", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const username = request.body.username;
     const password = request.body.password;
     const user = {
@@ -41,15 +47,15 @@ userRouter.post("/login", (request, response) => __awaiter(void 0, void 0, void 
         username: username,
         password: password
     };
-    const isUserAuthorized = yield isAuthorized(user);
+    const isUserAuthorized = yield (0, user_repository_1.isAuthorized)(user);
     if (isUserAuthorized) {
-        response.sendStatus(StatusCodes.OK);
+        response.sendStatus(http_status_codes_1.StatusCodes.OK);
     }
     else {
-        response.sendStatus(StatusCodes.UNAUTHORIZED);
+        response.sendStatus(http_status_codes_1.StatusCodes.UNAUTHORIZED);
     }
 }));
-userRouter.get("/", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield getAllUsers();
-    response.status(StatusCodes.OK).json(users);
+exports.userRouter.get("/", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    const users = yield (0, user_repository_1.getAllUsers)();
+    response.status(http_status_codes_1.StatusCodes.OK).json(users);
 }));
