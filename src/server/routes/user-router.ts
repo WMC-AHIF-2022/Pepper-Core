@@ -1,4 +1,4 @@
-import express from "express";
+import * as express from 'express';
 import {StatusCodes} from "http-status-codes";
 import {addUser, getAllUsers, isAuthorized} from "../data/user-repository";
 import {User} from "../data/user";
@@ -17,8 +17,7 @@ userRouter.post("/signup", async function (request, response) {
     const user: User = {
         id: -1,
         username: username,
-        password: password,
-        avatarId: NaN
+        password: password
     }
     try {
         await addUser(user);
@@ -36,8 +35,7 @@ userRouter.post("/login", async (request, response) => {
     const user: User = {
         id: -1,
         username: username,
-        password: password,
-        avatarId: NaN
+        password: password
     }
 
     const isUserAuthorized: boolean = await isAuthorized(user);
