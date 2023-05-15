@@ -1,0 +1,14 @@
+h1{
+    text-align: center;
+    font-size: 380%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-color: rgb(5,54,94);
+    background-image: linear-gradient(to bottom,rgb(5,54,94) 40%,rgb(84,188,227) 60%);
+    background-size: cover;
+    background-position: center center;
+}
+
+#XButton {
+    background-color: white;
+}
