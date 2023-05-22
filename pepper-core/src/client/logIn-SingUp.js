@@ -18,7 +18,7 @@ async function login() {
         sessionStorage.setItem('user-name', username);
         sessionStorage.setItem('user-password', password);
         loginStatus.innerHTML = "erfolgreich eingelogt";
-        window.location.href = "../../index.html";
+        window.location.href = "/";
     }
     catch (e) {
         loginError.innerHTML = `Login failed: ${e}`;
@@ -36,7 +36,6 @@ async function signup() {
         sessionStorage.setItem('user-name', username);
         sessionStorage.setItem('user-password', password);
         loginStatus.innerHTML = "Signup successful, please login to continue";
-        window.location.href = "index.html";
     }
     catch (e) {
         loginError.innerHTML = `Signup failed: ${e}`;

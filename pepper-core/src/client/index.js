@@ -1,4 +1,4 @@
-import { fetchRestEndpoint } from "../../utils/client-server.js";
+import { fetchRestEndpoint } from "./utils/client-server.js";
 const btnCreate = document.getElementById("createUserButton");
 const loginStatus = document.getElementById("loginStatus");
 const loginError = document.getElementById("loginError");
@@ -30,4 +30,4 @@ async function createUser() {
         loginError.innerHTML = `Create failed: ${e}`;
     }
 }
-//# sourceMappingURL=createUser.js.map
+//# sourceMappingURL=index.js.map

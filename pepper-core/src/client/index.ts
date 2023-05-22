@@ -1,5 +1,4 @@
-import {fetchRestEndpoint} from "../../utils/client-server.js";
-import {getUserId} from "../../../server/data/user-repository";
+import {fetchRestEndpoint} from "./utils/client-server.js";
 
 const btnCreate = document.getElementById("createUserButton");
 
@@ -38,8 +37,6 @@ async function createUser() {
         await fetchRestEndpoint(`http://localhost:3000/api/personUser/${userName}`, "PUT", data);
         console.log("wewewewwewe");
         loginStatus.innerHTML = "erfolgreich erstellt";
-
-
     } catch (e) {
         loginError.innerHTML = `Create failed: ${e}`;
     }

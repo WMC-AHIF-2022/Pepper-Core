@@ -12,6 +12,7 @@
     <script>var exports = {};</script>
 
     <script type="module" src="navbarUserName.js"></script>
+    <script src="index.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-dark fixed-top" style="background-color: rgb(0,0,0);">
@@ -39,18 +40,33 @@
     </div>
 </nav>
 <br><br>
-<table class="PersonTable">
-    <tr>
-        <th></th>
-        <th><h1>All Users</h1></th>
-        <th><a href="./pages/createUser/createUser.html"><img class="PlusButton" src="./img/white-plus-inside-a-black-square-symbol_318-53475.avif"></a></th>
-    </tr>
-    <tr>
-        <td></td>
-        <td><p class="PersonName">David Pröller</p></td>
-        <td><p><button class="detailsButton" href="pages/viewUser/viewUser.html">Details</button></p></td>
-    </tr>
-</table>
+<h1>Create User</h1><br>
+<button type="button" class="btn btn-primary" id="createUserButton">create</button>
+<form class="formSize" name="form1" method="post" action="/">
+    <input placeholder="Firstname" type="text" name="firstName" id="inputFirstName">
+</form>
+
+<form class="formSize" name="form2" method="post" action="/">
+    <input placeholder="Lastname" type="text" name="lastName" id="inputLastName">
+</form>
+
+<form class="formSize" name="form3" method="post" action="/">
+    <input placeholder="Birthdate" type="text" name="birthdate" id="inputBirthdate">
+    <input placeholder="Gender" type="text" name="gender" id="inputGender">
+</form>
+
+<div id="drop-area">
+    <form class="my-form">
+        <p>Upload multiple files with the file dialog or by dragging and dropping images onto the dashed region</p>
+        <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+        <label class="button" for="fileElem">Select some files</label>
+    </form>
+    <progress id="progress-bar" max=100 value=0></progress>
+    <div id="gallery" /></div>
+</div>
+
+<label id="loginStatus" class="text-success"></label>
+<label id="loginError" class="text-danger"></label>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
