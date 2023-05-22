@@ -9,7 +9,9 @@ export class DB {
             filename: `./${dbFileName}`,
             driver: Driver
         });
+        console.log("bevor ensure table");
         await DB.ensureTablesCreated(dbConnection);
+        console.log("after ensure table");
         return dbConnection;
     }
 
@@ -37,8 +39,21 @@ export class DB {
                 birthdate date,
                 gender NOT NULL,
                 userID NOT NULL
-            ) strict;
-        `);
+            ) strict;`
+        );
+        console.log("sollte das danach ausführen");
+        await connection.run(`
+            CREATE TABLE IF NOT EXISTS personsUsers (
+                id INTEGER PRIMARY KEY,
+                username NOT NULL,
+                password NOT NULL,
+                firstName NOT NULL,
+                lastName NOT NULL,
+                birthdate NOT NULL,
+                gender NOT NULL
+            )`
+        );
+        console.log("sollte ausgeführt sein");
         await connection.run(`
             CREATE TABLE IF NOT EXISTS pictures (
                 pictureID INTEGER PRIMARY KEY,

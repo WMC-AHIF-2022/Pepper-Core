@@ -14,7 +14,7 @@ async function login() {
         const elementPassword = document.getElementById("password");
         const password = elementPassword.value;
         const data = JSON.parse(`{"username": "${username}", "password": "${password}"}`);
-        await fetchRestEndpoint("http://localhost:3000/api/users/login", "POST", data);
+        await fetchRestEndpoint("http://localhost:3000/api/personUser/login", "POST", data);
         sessionStorage.setItem('user-name', username);
         sessionStorage.setItem('user-password', password);
         loginStatus.innerHTML = "erfolgreich eingelogt";
@@ -32,8 +32,11 @@ async function signup() {
         const elementPassword = document.getElementById("password");
         const password = elementPassword.value;
         const data = JSON.parse(`{"username": "${username}", "password": "${password}"}`);
-        await fetchRestEndpoint("http://localhost:3000/api/users/signup", "POST", data);
+        await fetchRestEndpoint("http://localhost:3000/api/personUser/signup", "POST", data);
+        sessionStorage.setItem('user-name', username);
+        sessionStorage.setItem('user-password', password);
         loginStatus.innerHTML = "Signup successful, please login to continue";
+        window.location.href = "index.html";
     }
     catch (e) {
         loginError.innerHTML = `Signup failed: ${e}`;

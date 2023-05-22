@@ -9,22 +9,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addPerson = void 0;
+exports.getAllPersons = exports.addPerson = void 0;
 const database_1 = require("../database");
 function addPerson(person) {
     return __awaiter(this, void 0, void 0, function* () {
         const db = yield database_1.DB.createDBConnection();
-        const stmt = yield db.prepare('INSERT INTO persons(firstName, lastName, birthdate, gender, userID) VALUES (?1, ?2, ?3, ?4, ?5)');
-        yield stmt.bind({ 1: person.firstName, 2: person.lastName, 3: person.birthdate, 4: person.gender, 5: person.userID });
+        const stmt = yield db.prepare('INSERT INTO persons(firstName, lastName, birthdate, gender) VALUES (?1, ?2, ?3, ?4)');
+        yield stmt.bind({ 1: person.firstName, 2: person.lastName, 3: person.birthdate, 4: person.gender });
         const operationResult = yield stmt.run();
         yield stmt.finalize();
         yield db.close();
-        if (typeof operationResult.changes !== "number" || operationResult.changes !== 1) {
-            throw new Error("Adding Person Error!");
-        }
-        else {
-            person.personID = operationResult.lastID;
-        }
+        person.personID = operationResult.lastID;
     });
 }
 exports.addPerson = addPerson;
+function getAllPersons() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const db = yield database_1.DB.createDBConnection();
+        const persons = yield db.all('SELECT * FROM persons');
+        yield db.close();
+        return persons;
+    });
+}
+exports.getAllPersons = getAllPersons;
+/*
+async function getNextPersonID(): Promise<number> {
+    const db = await DB.createDBConnection();
+    const nextPersonID: number = await db.all('select count(personID) from persons');
+    await db.close();
+    return nextPersonID;
+}*/ 

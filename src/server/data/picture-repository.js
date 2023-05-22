@@ -9,22 +9,31 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addPicture = void 0;
+exports.getAllPersons = exports.addPicture = void 0;
 const database_1 = require("../database");
 function addPicture(picture) {
     return __awaiter(this, void 0, void 0, function* () {
         const db = yield database_1.DB.createDBConnection();
-        const stmt = yield db.prepare('INSERT INTO pictures(url, personID) VALUES (?1, ?2)');
-        yield stmt.bind({ 1: picture.url, 2: picture.personID });
+        const stmt = yield db.prepare('INSERT INTO pictures(url) VALUES (?1)');
+        yield stmt.bind({ 1: picture.url });
         const operationResult = yield stmt.run();
         yield stmt.finalize();
         yield db.close();
-        if (typeof operationResult.changes !== "number" || operationResult.changes !== 1) {
-            throw new Error("Adding Picture Error!");
+        if (operationResult.changes === null || operationResult.changes !== 1) {
+            throw new Error("picture konnte nicht erstellt werden");
         }
         else {
-            picture.pictureID = operationResult.lastID;
+            pictureID: operationResult.lastID;
         }
     });
 }
 exports.addPicture = addPicture;
+function getAllPersons() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const db = yield database_1.DB.createDBConnection();
+        const users = yield db.all('SELECT * FROM pictures');
+        yield db.close();
+        return users;
+    });
+}
+exports.getAllPersons = getAllPersons;

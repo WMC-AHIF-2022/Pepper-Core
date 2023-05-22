@@ -1,5 +1,4 @@
-import { fetchRestEndpoint } from "../../utils/client-server";
-import { getUserId } from "../../../server/data/user-repository";
+import { fetchRestEndpoint } from "../../utils/client-server.js";
 const btnCreate = document.getElementById("createUserButton");
 const loginStatus = document.getElementById("loginStatus");
 const loginError = document.getElementById("loginError");
@@ -10,7 +9,7 @@ async function createUser() {
         loginError.innerHTML = " ";
         loginStatus.innerHTML = " ";
         const elementFirstName = document.getElementById("inputFirstName");
-        const firstName = elementFirstName.value;
+        const fName = elementFirstName.value;
         const elementLastName = document.getElementById("inputLastName");
         const lastName = elementLastName.value;
         const elementBirthdate = document.getElementById("inputBirthdate");
@@ -20,11 +19,10 @@ async function createUser() {
         const userName = sessionStorage.getItem('user-name');
         const userPassword = sessionStorage.getItem('user-password');
         console.log("in create user methode felder eingelesen");
-        const userID = await getUserId(userName, userPassword);
         console.log("user id wurde geholt");
-        const data = JSON.parse(`{"firstName": "${firstName}", "lastName": "${lastName}", "birthdate": "${birthdate}", "gender": "${gender}", "userID": "${userID}`);
+        const data = { firstName: fName, lastName: lastName, birthdate: birthdate, gender: gender };
         console.log("wowowowow");
-        await fetchRestEndpoint("http://localhost:3000/api/persons/", "POST", data);
+        await fetchRestEndpoint(`http://localhost:3000/api/personUser/${userName}`, "PUT", data);
         console.log("wewewewwewe");
         loginStatus.innerHTML = "erfolgreich erstellt";
     }

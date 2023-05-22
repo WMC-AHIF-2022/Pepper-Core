@@ -1,11 +1,8 @@
 import express from "express";
 import {StatusCodes} from "http-status-codes";
-import {addUser, getAllUsers, isAuthorized} from "../data/user-repository";
 import {Picture} from "../data/picture";
 import {addPicture} from "../data/pictures-repository";
 import {DB} from "../database";
-import {Person} from "../data/person";
-import {personRouter} from "./person-router";
 
 export const pictureRouter = express.Router();
 
