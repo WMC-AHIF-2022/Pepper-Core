@@ -1,37 +1,37 @@
 import express from "express";
 import {StatusCodes} from "http-status-codes";
-import {addPerson, getAllPersons} from "../data/person-repository";
 import {Picture} from "../data/picture";
+import {addPicture} from "../data/pictures-repository";
+import {DB} from "../database";
 
-export const personRouter = express.Router();
+export const pictureRouter = express.Router();
 
-personRouter.post("/", async (request, response) => {
-    const firstName: string = request.body.firstName;
-    const lastName: string = request.body.lastName;
-    const birthdate: string = request.body.birthdate;
-    const gender: string = request.body.gender;
+pictureRouter.post("/", async function (request, response) {
+    const url: string = request.body.url;
 
-    /*const person: Picture = {
-        personID: -1,
-        firstName: firstName,
-        lastName: lastName,
-        birthdate: birthdate,
-        gender: gender
+    const picture: Picture = {
+        pictureID: -1,
+        url: url,
+        personID: 0
     }
-
-    addPerson(person);
-
-    //const isUserAuthorized: boolean = await isAuthorized(user);
-    /*if (isUserAuthorized){
+    try {
+        await addPicture(picture);
         response.sendStatus(StatusCodes.OK);
     }
-    else {
-        response.sendStatus(StatusCodes.UNAUTHORIZED);
-    }*/
+    catch (e) {
+        response.sendStatus(StatusCodes.BAD_REQUEST);
+    }
+});
 
-})
+pictureRouter.get("/", async (request, response) => {
+    const db = await DB.createDBConnection();
+    const pictures: Picture[] = await db.all<Picture[]>('SELECT * from picture')
+    response.status(StatusCodes.OK).json(pictures);
+});
 
-personRouter.get("/", async (request, response) => {
-    const persons = await getAllPersons();
-    response.status(StatusCodes.OK).json(persons);
-})
+pictureRouter.delete("/", async function (request, response) {
+    const db = await DB.createDBConnection();
+    await db.all('truncate table pictures');
+    await db.close();
+    response.status(StatusCodes.OK);
+});

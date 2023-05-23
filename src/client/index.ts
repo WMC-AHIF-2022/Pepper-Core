@@ -1,43 +1,43 @@
 import {fetchRestEndpoint} from "./utils/client-server.js";
 
-const btnLogin = document.getElementById("btnLogin");
-const btnSignup = document.getElementById("btnSignup");
+const btnCreate = document.getElementById("createUserButton");
 
-if(btnSignup){
-    btnSignup.addEventListener("click", async () => await signup());
-}
-if(btnLogin){
-    btnLogin.addEventListener("click", async () => await login());
-}
+const loginStatus = document.getElementById("loginStatus");
+const loginError = document.getElementById("loginError");
 
+btnCreate.addEventListener("click", async () => await createUser());
 
-async function login(){
-    try{
-        const elementUsername = <HTMLInputElement>document.getElementById("username");
-        const username = elementUsername.value;
-        const elementPassword = <HTMLInputElement>document.getElementById("password");
-        const password = elementPassword.value;
+async function createUser() {
+    try {
+        console.log("create user methode hineingegangen");
+        loginError.innerHTML = " ";
+        loginStatus.innerHTML = " ";
 
-        const data = JSON.parse(`{"username": "${username}", "password": "${password}"}`);
-        await fetchRestEndpoint("http://localhost:3333/api/users/login", "POST", data);
-        console.log("Yessir");
-        sessionStorage.setItem('chat-user', username);
-    }catch (e){
-        alert(e);
-    }
-}
+        const elementFirstName = <HTMLInputElement>document.getElementById("inputFirstName");
+        const fName = elementFirstName.value;
 
-async function signup(){
-    try{
-        const elementUsername = <HTMLInputElement>document.getElementById("username");
-        const username = elementUsername.value;
-        const elementPassword = <HTMLInputElement>document.getElementById("password");
-        const password = elementPassword.value;
+        const elementLastName = <HTMLInputElement>document.getElementById("inputLastName");
+        const lastName = elementLastName.value;
 
-        const data = JSON.parse(`{"username": "${username}", "password": "${password}"}`);
-        await fetchRestEndpoint("http://localhost:3333/api/users/signup", "POST", data);
-        console.log("Yessir");
-    }catch (e){
-        alert(e);
+        const elementBirthdate = <HTMLInputElement>document.getElementById("inputBirthdate");
+        const birthdate = elementBirthdate.value;
+
+        const elementGender = <HTMLInputElement>document.getElementById("inputGender");
+        const gender = elementGender.value;
+
+        const userName = sessionStorage.getItem('user-name');
+        const userPassword = sessionStorage.getItem('user-password');
+
+        console.log("in create user methode felder eingelesen");
+
+        console.log("user id wurde geholt");
+
+        const data = {firstName: fName, lastName: lastName,birthdate: birthdate, gender: gender};
+        console.log("wowowowow");
+        await fetchRestEndpoint(`http://localhost:3000/api/personUser/${userName}`, "PUT", data);
+        console.log("wewewewwewe");
+        loginStatus.innerHTML = "erfolgreich erstellt";
+    } catch (e) {
+        loginError.innerHTML = `Create failed: ${e}`;
     }
 }

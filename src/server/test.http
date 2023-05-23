@@ -1,0 +1,118 @@
+POST http://localhost:3000/api/users/signup HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "ui",
+  "password": "uii"
+}
+###################################################
+POST http://localhost:3000/api/users/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "demo",
+  "password": "demo"
+}
+
+###################################################
+GET http://localhost:3000/api/users HTTP/1.1
+
+
+##################################################
+
+GET http://localhost:3000/api/messages HTTP/1.1
+
+###################################################
+
+GET http://localhost:3000/api/messages/2 HTTP/1.1
+
+###################################################
+
+POST http://localhost:3000/api/messages HTTP/1.1
+Content-Type: application/json
+
+{
+    "author": "Lorenz Holzbauer",
+    "avatarId": 1,
+    "content": "Hello"
+}
+
+###################################################
+
+
+DELETE http://localhost:3000/api/messages HTTP/1.1
+
+###################################################
+
+
+
+
+
+
+GET http://localhost:3000/api/avatars HTTP/1.1
+
+###################################################
+
+GET http://localhost:3000/api/avatars/2 HTTP/1.1
+
+###################################################
+
+POST http://localhost:3000/api/avatars HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Lorenz",
+    "url": "https://holzbauer.dev"
+}
+
+###################################################
+
+
+DELETE http://localhost:3000/api/avatars HTTP/1.1
+
+
+
+
+
+
+###################################################
+POST http://localhost:3000/api/persons HTTP/1.1
+Content-Type: application/json
+
+{
+  "firstName": "hello",
+  "lastName": "hello123",
+  "birthdate": "14.04.2006",
+  "gender": "m"
+}
+####################################################
+DELETE http://localhost:3000/api/persons HTTP/1.1
+####################################################
+
+GET http://localhost:3000/api/persons HTTP/1.1
+#####################################################
+
+
+
+
+
+
+
+POST http://localhost:3000/api/pictures HTTP/1.1
+Content-Type: application/json
+
+{
+  "url": "yyyy"
+}
+
+##################################################
+
+
+
+POST http://localhost:3000/api/personsUsers HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "flo",
+  "password": "flo1"
+}

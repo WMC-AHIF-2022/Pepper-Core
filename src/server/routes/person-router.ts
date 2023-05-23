@@ -1,15 +1,18 @@
 import express from "express";
 import {StatusCodes} from "http-status-codes";
-import {addPerson, getAllPersons} from "../data/person-repository";
+import {addPerson} from "../data/person-repository";
 import {Person} from "../data/person";
+import {DB} from "../database";
 
 export const personRouter = express.Router();
 
-personRouter.post("/", async (request, response) => {
+personRouter.post("/", async function (request, response) {
     const firstName: string = request.body.firstName;
     const lastName: string = request.body.lastName;
     const birthdate: string = request.body.birthdate;
     const gender: string = request.body.gender;
+    const userID: number = request.body.userID;
+
 
     const person: Person = {
         personID: -1,
@@ -17,18 +20,27 @@ personRouter.post("/", async (request, response) => {
         lastName: lastName,
         birthdate: birthdate,
         gender: gender,
-        userID: NaN
+        userID: userID
     }
     try {
         await addPerson(person);
-        response.status(StatusCodes.CREATED).send(person);
-    } catch (e) {
-        console.log("Error im catch!!!!!!!!!!!");
-        response.sendStatus(StatusCodes.BAD_REQUEST)
+        response.sendStatus(StatusCodes.OK);
     }
-})
+    catch (e) {
+        response.sendStatus(StatusCodes.BAD_REQUEST);
+    }
+});
 
-personRouter.get("/", async (request, response) => {
-    const persons = await getAllPersons();
+personRouter.delete("/", async function (request, response) {
+    const db = await DB.createDBConnection();
+    await db.all('truncate table persons');
+    await db.close();
+    response.status(StatusCodes.OK);
+});
+
+personRouter.get("/", async function (request, response) {
+    const db = await DB.createDBConnection();
+    const persons: Person[] = await db.all<Person[]>('select * from persons');
+    await db.close();
     response.status(StatusCodes.OK).json(persons);
-})
+});

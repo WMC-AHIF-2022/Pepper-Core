@@ -17,7 +17,8 @@ userRouter.post("/signup", async function (request, response) {
     const user: User = {
         id: -1,
         username: username,
-        password: password
+        password: password,
+        avatarId: NaN
     }
     try {
         await addUser(user);
@@ -25,6 +26,7 @@ userRouter.post("/signup", async function (request, response) {
     }
     catch (e) {
         response.sendStatus(StatusCodes.BAD_REQUEST);
+        console.log("xxx");
     }
 });
 
@@ -35,7 +37,8 @@ userRouter.post("/login", async (request, response) => {
     const user: User = {
         id: -1,
         username: username,
-        password: password
+        password: password,
+        avatarId: NaN
     }
 
     const isUserAuthorized: boolean = await isAuthorized(user);

@@ -1,53 +1,33 @@
-"use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const client_server_js_1 = require("./utils/client-server.js");
-const btnLogin = document.getElementById("btnLogin");
-const btnSignup = document.getElementById("btnSignup");
-if (btnSignup) {
-    btnSignup.addEventListener("click", () => __awaiter(void 0, void 0, void 0, function* () { return yield signup(); }));
+import { fetchRestEndpoint } from "./utils/client-server.js";
+const btnCreate = document.getElementById("createUserButton");
+const loginStatus = document.getElementById("loginStatus");
+const loginError = document.getElementById("loginError");
+btnCreate.addEventListener("click", async () => await createUser());
+async function createUser() {
+    try {
+        console.log("create user methode hineingegangen");
+        loginError.innerHTML = " ";
+        loginStatus.innerHTML = " ";
+        const elementFirstName = document.getElementById("inputFirstName");
+        const fName = elementFirstName.value;
+        const elementLastName = document.getElementById("inputLastName");
+        const lastName = elementLastName.value;
+        const elementBirthdate = document.getElementById("inputBirthdate");
+        const birthdate = elementBirthdate.value;
+        const elementGender = document.getElementById("inputGender");
+        const gender = elementGender.value;
+        const userName = sessionStorage.getItem('user-name');
+        const userPassword = sessionStorage.getItem('user-password');
+        console.log("in create user methode felder eingelesen");
+        console.log("user id wurde geholt");
+        const data = { firstName: fName, lastName: lastName, birthdate: birthdate, gender: gender };
+        console.log("wowowowow");
+        await fetchRestEndpoint(`http://localhost:3000/api/personUser/${userName}`, "PUT", data);
+        console.log("wewewewwewe");
+        loginStatus.innerHTML = "erfolgreich erstellt";
+    }
+    catch (e) {
+        loginError.innerHTML = `Create failed: ${e}`;
+    }
 }
-if (btnLogin) {
-    btnLogin.addEventListener("click", () => __awaiter(void 0, void 0, void 0, function* () { return yield login(); }));
-}
-function login() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const elementUsername = document.getElementById("username");
-            const username = elementUsername.value;
-            const elementPassword = document.getElementById("password");
-            const password = elementPassword.value;
-            const data = JSON.parse(`{"username": "${username}", "password": "${password}"}`);
-            yield (0, client_server_js_1.fetchRestEndpoint)("http://localhost:3333/api/users/login", "POST", data);
-            console.log("Yessir");
-            sessionStorage.setItem('chat-user', username);
-        }
-        catch (e) {
-            alert(e);
-        }
-    });
-}
-function signup() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const elementUsername = document.getElementById("username");
-            const username = elementUsername.value;
-            const elementPassword = document.getElementById("password");
-            const password = elementPassword.value;
-            const data = JSON.parse(`{"username": "${username}", "password": "${password}"}`);
-            yield (0, client_server_js_1.fetchRestEndpoint)("http://localhost:3333/api/users/signup", "POST", data);
-            console.log("Yessir");
-        }
-        catch (e) {
-            alert(e);
-        }
-    });
-}
+//# sourceMappingURL=index.js.map

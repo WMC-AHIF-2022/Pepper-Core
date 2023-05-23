@@ -15,21 +15,21 @@ Wenn der Benutzer auf die Webseite kommt sieht man eine Liste von aller vorhande
 
 Die REST-API speichert die Daten auf eine Datenbank. Von dortaus bekommt sie auch die Daten wieder. Die REST-API ist nur die Schnittstelle zwischen Benutzer,Roboter und Datenbank.
 
-<img src="./Person Manager For Pepper/MindMap.PNG" alt="Mind Map" title="Mind Map" />
+<img src="./Diagramme/MindMap.PNG" alt="Mind Map" title="Mind Map" />
 
 ## 2. Funktionale Anforderungen
 
 
 ### 2.1. Use Case Überblick
 
-<img src="./Person Manager For Pepper/USE-CASE-DIAGRAM.PNG">
+<img src="./Diagramme/USE-CASE-DIAGRAM.PNG">
 
 
 ### 2.2. Use Case Ansicht von allen Personen
 
 #### 2.2.1 GUI-Design
 
-<img src="./Person Manager For Pepper/USE-CASE-1.PNG">
+<img src="./Diagramme/USE-CASE-1.PNG">
 
 #### 2.2.2 Workflow
 
@@ -42,7 +42,7 @@ Person klickt, dann kommt man zu den Daten der einzelnen Personen.
 
 #### 2.3.1 GUI-Design
 
-<img src="./Person Manager For Pepper/USE-CASE-4.PNG">
+<img src="./Diagramme/USE-CASE-4.PNG">
 
 #### 2.3.2 Workflow
 
@@ -52,7 +52,7 @@ Wenn der User auf der Startseite auf das Plus gedrückt hat kann er einen neuen 
 
 #### 2.4.1 GUI-Design
 
-<img src="./Person Manager For Pepper/USE-CASE-2.PNG">
+<img src="./Diagramme/USE-CASE-2.PNG">
 
 #### 2.4.2 Workflow
 
@@ -65,7 +65,7 @@ Durch den Delete Button kann die ausgewählte Person gelöscht werden und die Pe
 
 #### 2.5.1 GUI-Design
 
-<img src="./Person Manager For Pepper/USE-CASE-3.PNG">
+<img src="./Diagramme/USE-CASE-3.PNG">
 
 #### 2.5.2 Workflow
 
@@ -111,8 +111,8 @@ Um einen eigenen User zu erstellen muss man sich einen Account erstellen. Man mu
 
 ## 5. Systemarchitektur
 
-<img src="./Person Manager For Pepper/Systemarchitektur.PNG">
+<img src="./Diagramme/Systemarchitektur.PNG">
 
 ## 6. Datenmodell
 
-<img src="./Person Manager For Pepper/Datenmodell.PNG">
+<img src="./Diagramme/Datenmodell.PNG">

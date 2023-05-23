@@ -1,28 +1,18 @@
 import {DB} from "../database";
 import {Person} from "./person";
 
-export async function addPerson(person: Person){
+export async function addPerson(person: Person) {
     const db = await DB.createDBConnection();
-    const stmt = await db.prepare('INSERT INTO persons(firstName, lastName, birthdate, gender) VALUES (?1, ?2, ?3, ?4)');
-    await stmt.bind({1: person.firstName, 2: person.lastName, 3: person.birthdate, 4: person.gender});
+    const stmt = await db.prepare('INSERT INTO persons(firstName, lastName, birthdate, gender, userID) VALUES (?1, ?2, ?3, ?4, ?5)');
+    await stmt.bind({1: person.firstName, 2: person.lastName, 3: person.birthdate, 4: person.gender, 5: person.userID});
     const operationResult = await stmt.run();
     await stmt.finalize();
     await db.close();
 
-    person.personID = operationResult.lastID!;
-}
+    if (typeof operationResult.changes !== "number" || operationResult.changes !== 1) {
+        throw new Error("Adding Person Error!");
 
-export async function getAllPersons(): Promise<Person[]>{
-    const db = await DB.createDBConnection();
-    const persons: Person[] = await db.all<Person[]>('SELECT * FROM persons');
-    await db.close();
-    return persons;
+    } else {
+        person.personID = operationResult.lastID!;
+    }
 }
-
-/*
-async function getNextPersonID(): Promise<number> {
-    const db = await DB.createDBConnection();
-    const nextPersonID: number = await db.all('select count(personID) from persons');
-    await db.close();
-    return nextPersonID;
-}*/
