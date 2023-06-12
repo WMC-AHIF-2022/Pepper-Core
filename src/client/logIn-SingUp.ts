@@ -38,8 +38,6 @@ async function signup() {
 
         const data = JSON.parse(`{"username": "${username}", "password": "${password}"}`);
         await fetchRestEndpoint("http://localhost:3000/api/personUser/signup", "POST", data);
-        sessionStorage.setItem('user-name', username);
-        sessionStorage.setItem('user-password', password);
         loginStatus.innerHTML = "Signup successful, please login to continue";
     } catch (e) {
         loginError.innerHTML = `Signup failed: ${e}`;

@@ -1,47 +1,32 @@
-"use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.DB = exports.dbFileName = void 0;
-const sqlite3_1 = require("sqlite3");
-const sqlite_1 = require("sqlite");
-exports.dbFileName = 'database.db';
-class DB {
-    static createDBConnection() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const dbConnection = yield (0, sqlite_1.open)({
-                filename: `./${exports.dbFileName}`,
-                driver: sqlite3_1.Database
-            });
-            console.log("bevor ensure table");
-            yield DB.ensureTablesCreated(dbConnection);
-            console.log("after ensure table");
-            return dbConnection;
+import { Database as Driver } from "sqlite3";
+import { open } from "sqlite";
+export const dbFileName = 'database.db';
+export class DB {
+    static async createDBConnection() {
+        const dbConnection = await open({
+            filename: `./${dbFileName}`,
+            driver: Driver
         });
+        console.log("bevor ensure table");
+        await DB.ensureTablesCreated(dbConnection);
+        console.log("after ensure table");
+        return dbConnection;
     }
-    static ensureTablesCreated(connection) {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield connection.run(`
+    static async ensureTablesCreated(connection) {
+        await connection.run(`
             create table if not exists avatars (
                 id INTEGER NOT NULL PRIMARY KEY,
                 name TEXT NOT NULL,
                 url TEXT DEFAULT false
             ) strict;`);
-            yield connection.run(`
+        await connection.run(`
             CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY,
                 username UNIQUE NOT NULL,
                 password NOT NULL,
                 avatarId INTEGER
             ) strict;`);
-            yield connection.run(`
+        await connection.run(`
             CREATE TABLE IF NOT EXISTS persons (
                 personID INTEGER PRIMARY KEY,
                 firstName NOT NULL,
@@ -50,8 +35,8 @@ class DB {
                 gender NOT NULL,
                 userID NOT NULL
             ) strict;`);
-            console.log("sollte das danach ausführen");
-            yield connection.run(`
+        console.log("sollte das danach ausführen");
+        await connection.run(`
             CREATE TABLE IF NOT EXISTS personsUsers (
                 id INTEGER PRIMARY KEY,
                 username NOT NULL,
@@ -61,15 +46,14 @@ class DB {
                 birthdate NOT NULL,
                 gender NOT NULL
             )`);
-            console.log("sollte ausgeführt sein");
-            yield connection.run(`
+        console.log("sollte ausgeführt sein");
+        await connection.run(`
             CREATE TABLE IF NOT EXISTS pictures (
                 pictureID INTEGER PRIMARY KEY,
                 url NOT NULL,
                 personID INTEGER
             ) 
         `);
-        });
     }
 }
-exports.DB = DB;
+//# sourceMappingURL=database.js.map

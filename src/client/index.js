@@ -1,22 +1,43 @@
 import { fetchRestEndpoint } from "./utils/client-server.js";
 const btnCreate = document.getElementById("createUserButton");
+const editBtn = document.getElementById("editUserButton");
 const loginStatus = document.getElementById("loginStatus");
 const loginError = document.getElementById("loginError");
-btnCreate.addEventListener("click", async () => await createUser());
+const elementFirstName = document.getElementById("inputFirstName");
+const elementLastName = document.getElementById("inputLastName");
+const elementBirthdate = document.getElementById("inputBirthdate");
+const elementGender = document.getElementById("inputGender");
+if (sessionStorage.getItem("user-name") !== null) {
+    const user = await fetchRestEndpoint(`/api/personUser/${sessionStorage.getItem("user-name")}`, "GET").then(r => r.json());
+    if (user.firstName === ' ') {
+        alert("You can create a User now!");
+    }
+    else {
+        window.location.href = "/pages/viewUser/viewUser.html";
+        elementFirstName.value = user.lastName;
+        elementLastName.value = user.lastName;
+        elementBirthdate.value = user.birthdate;
+        elementGender.value = user.gender;
+    }
+}
+btnCreate.addEventListener("click", async function () {
+    if (sessionStorage.getItem("user-name") !== null) {
+        await createUser();
+    }
+    else {
+        alert("You have to SignUp/Login before you can create your User!");
+    }
+});
 //https://runebook.dev/de/docs/html/element/input/file
-document.getElementById("profilePicture").addEventListener('change', dateiauswahl, false);
+//document.getElementById("profilePicture").addEventListener('change', dateiauswahl, false)
 async function createUser() {
     try {
         console.log("create user methode hineingegangen");
         loginError.innerHTML = " ";
         loginStatus.innerHTML = " ";
-        const elementFirstName = document.getElementById("inputFirstName");
         const fName = elementFirstName.value;
-        const elementLastName = document.getElementById("inputLastName");
         const lastName = elementLastName.value;
-        const elementBirthdate = document.getElementById("inputBirthdate");
         const birthdate = elementBirthdate.value;
-        const elementGender = document.getElementById("inputGender");
         const gender = elementGender.value;
         console.log();
         const userName = sessionStorage.getItem('user-name');

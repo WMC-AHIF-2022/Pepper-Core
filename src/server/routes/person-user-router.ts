@@ -2,15 +2,26 @@ import express from "express";
 import {StatusCodes} from "http-status-codes";
 import {PersonUser} from "../data/person-user";
 import {addPersonUser, updatePersonUser} from "../data/person-user-repository";
-import {isAuthorized} from "../data/person-user-repository";
+import {isAuthorized,getUserDetails} from "../data/person-user-repository";
+import {DB} from "../database";
 
 export const personUserRouter = express.Router();
+
+personUserRouter.get("/:username", async function (request, response) {
+    const username = request.params.username;
+    const db = await  DB.createDBConnection();
+    const stmt = await db.prepare(`SELECT * FROM personsUsers WHERE username = ?1`);
+    await stmt.bind({1: username});
+    const result: PersonUser | undefined = await stmt.get<PersonUser>();
+    await stmt.finalize();
+    await db.close();
+    response.send(result);
+});
 
 personUserRouter.post("/signup", async function (request, response) {
     const username: string = request.body.username;
     const password: string = request.body.password;
 
-    console.log("username und password aus body eingelesen");
     const personUser: PersonUser = {
         id: 0,
         username: username,
@@ -20,11 +31,8 @@ personUserRouter.post("/signup", async function (request, response) {
         birthdate: " ",
         gender: " "
     }
-    console.log("personUser wurde erstellt");
     try {
-        console.log("in addPersonUser Methode hineingehen");
         await addPersonUser(personUser);
-        console.log("addPersonUser abgeschlossen");
         response.sendStatus(StatusCodes.OK);
     }
     catch (e) {
@@ -36,7 +44,6 @@ personUserRouter.post("/login", async function (request, response) {
     const username: string = request.body.username;
     const password: string = request.body.password;
 
-    console.log("username und password aus body eingelesen");
     const personUser: PersonUser = {
         id: 0,
         username: username,
@@ -64,11 +71,10 @@ personUserRouter.put("/:username", async function (request, response) {
     const birthdate: string = request.body.birthdate;
     const gender: string = request.body.gender;
 
-    console.log("id und firstName und lastName aus body/params eingelesen");
     try {
-        console.log("in updatePersonUser Methode hineingehen");
+        console.log("1");
         await updatePersonUser(firstName, lastName, birthdate, gender, username);
-        console.log("updatePersonUser abgeschlossen");
+        console.log("FERTIG!!!!!!!");
         response.sendStatus(StatusCodes.OK);
     }
     catch (e) {

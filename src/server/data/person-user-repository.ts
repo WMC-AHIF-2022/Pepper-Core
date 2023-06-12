@@ -2,6 +2,17 @@ import {PersonUser} from "./person-user";
 import {DB} from "../database";
 import {User} from "./user";
 import {Person} from "./person";
+import {StatusCodes} from "http-status-codes";
+
+export async function getUserDetails(username:string):Promise<PersonUser|undefined>{
+    const db = await  DB.createDBConnection();
+    const stmt = await db.prepare(`SELECT * FROM personsUsers WHERE username = ?1`);
+    await stmt.bind({1: username});
+    const result: PersonUser | undefined = await stmt.get<PersonUser>();
+    await stmt.finalize();
+    await db.close();
+    return result;
+}
 
 export async function addPersonUser(personUser: PersonUser) {
     const db = await DB.createDBConnection();
@@ -19,15 +30,11 @@ export async function addPersonUser(personUser: PersonUser) {
 }
 export async function updatePersonUser(firstName: string, lastName: string, birthdate: string, gender: string, username: string) {
     const db = await DB.createDBConnection();
-    const stmt = await db.prepare('UPDATE personsUsers set firstName = ?1, lastName = ?2, birthdate = ?3, gender = ?4 where username = ?5');
+    const stmt = await db.prepare('update personsUsers set firstName = ?1, lastName = ?2, birthdate = ?3, gender = ?4 where username = ?5');
     await stmt.bind({1: firstName, 2: lastName, 3: birthdate, 4: gender, 5: username});
     const operationResult = await stmt.run();
     await stmt.finalize();
     await db.close();
-
-    if (typeof operationResult.changes !== "number" || operationResult.changes !== 1) {
-        throw new Error("Updating PersonUser Error!");
-    }
 }
 
 export async function isAuthorized(personUser: PersonUser): Promise<boolean>{
