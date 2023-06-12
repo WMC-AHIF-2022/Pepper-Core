@@ -1,7 +1,5 @@
 import {PersonUser} from "./person-user";
 import {DB} from "../database";
-import {User} from "./user";
-import {Person} from "./person";
 import {StatusCodes} from "http-status-codes";
 
 export async function getUserDetails(username:string):Promise<PersonUser|undefined>{

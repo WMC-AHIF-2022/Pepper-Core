@@ -3,8 +3,6 @@ import {StatusCodes} from "http-status-codes";
 import {Picture} from "../data/picture";
 import {addPicture} from "../data/pictures-repository";
 import {DB} from "../database";
-import {PersonUser} from "../data/person-user";
-
 export const pictureRouter = express.Router();
 
 pictureRouter.post("/:username", async function (request, response) {
