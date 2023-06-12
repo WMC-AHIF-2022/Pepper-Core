@@ -32,23 +32,18 @@ btnCreate.addEventListener("click", async function () {
 //document.getElementById("profilePicture").addEventListener('change', dateiauswahl, false)
 async function createUser() {
     try {
-        console.log("create user methode hineingegangen");
         loginError.innerHTML = " ";
         loginStatus.innerHTML = " ";
         const fName = elementFirstName.value;
         const lastName = elementLastName.value;
         const birthdate = elementBirthdate.value;
         const gender = elementGender.value;
-        console.log();
         const userName = sessionStorage.getItem('user-name');
         const userPassword = sessionStorage.getItem('user-password');
-        console.log("in create user methode felder eingelesen");
-        console.log("user id wurde geholt");
         const data = { firstName: fName, lastName: lastName, birthdate: birthdate, gender: gender };
-        console.log("wowowowow");
         await fetchRestEndpoint(`http://localhost:3000/api/personUser/${userName}`, "PUT", data);
-        console.log("wewewewwewe");
         loginStatus.innerHTML = "erfolgreich erstellt";
+        window.location.href = "/pages/viewUser/viewUser.html";
     }
     catch (e) {
         loginError.innerHTML = `Create failed: ${e}`;
