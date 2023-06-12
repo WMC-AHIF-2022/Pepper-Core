@@ -75,19 +75,36 @@ h1 {
 }
 
 .grid-container {
-    margin-top: 5%;
+    margin-top: 0%;
     display: grid;
-    grid-template-columns: auto auto auto;
-    background-color: #2196F3;
-    padding: 10px;
+    grid-template-columns: auto auto auto auto auto;
 }
 .grid-item {
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    font-size: 30px;
     text-align: center;
 }
+
+.picturesForMemoryTxt {
+    font-size: 150%;
+    font-weight: bold;
+}
+
+#imgItemOne {
+    width: 90%;
+    height: 90%;
+}
+#imgItemTwo {
+    width: 90%;
+    height: 90%;
+}
+#imgItemThree {
+    width: 90%;
+    height: 90%;
+}
+#imgItemFour {
+     width: 90%;
+     height: 90%;
+ }
+
 
 #profilePictureTxt {
     float: right;

@@ -3,16 +3,18 @@ import {StatusCodes} from "http-status-codes";
 import {Picture} from "../data/picture";
 import {addPicture} from "../data/pictures-repository";
 import {DB} from "../database";
+import {PersonUser} from "../data/person-user";
 
 export const pictureRouter = express.Router();
 
-pictureRouter.post("/", async function (request, response) {
+pictureRouter.post("/:username", async function (request, response) {
     const url: string = request.body.url;
+    const username: string = request.params.username;
 
     const picture: Picture = {
         pictureID: -1,
         url: url,
-        personID: 0
+        username: username
     }
     try {
         await addPicture(picture);
@@ -23,10 +25,15 @@ pictureRouter.post("/", async function (request, response) {
     }
 });
 
-pictureRouter.get("/", async (request, response) => {
-    const db = await DB.createDBConnection();
-    const pictures: Picture[] = await db.all<Picture[]>('SELECT * from picture')
-    response.status(StatusCodes.OK).json(pictures);
+pictureRouter.get("/:username", async (request, response) => {
+    const username: string = request.params.username;
+    const db = await  DB.createDBConnection();
+    const stmt = await db.prepare(`SELECT * FROM pictures WHERE username = ?1`);
+    await stmt.bind({1: username});
+    const result: Picture[] | undefined = await stmt.all<Picture[]>();
+    await stmt.finalize();
+    await db.close();
+    response.status(StatusCodes.OK).json(result);
 });
 
 pictureRouter.delete("/", async function (request, response) {
