@@ -27,7 +27,6 @@ if(sessionStorage.getItem("user-name") !== null){
     btnCreate.disabled = false;
 }
 
-
 btnCreate.addEventListener("click", async function (){
     if(sessionStorage.getItem("user-name") !== null){
         await createUser();

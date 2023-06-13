@@ -4,8 +4,11 @@ import {PersonUser} from "../data/person-user";
 import {addPersonUser, updatePersonUser} from "../data/person-user-repository";
 import {isAuthorized,getUserDetails} from "../data/person-user-repository";
 import {DB} from "../database";
+import bcrypt from "bcrypt";
 
 export const personUserRouter = express.Router();
+
+export const saltRounds: number = 8;
 
 personUserRouter.get("/:username", async function (request, response) {
     const username = request.params.username;
@@ -31,6 +34,8 @@ personUserRouter.post("/signup", async function (request, response) {
         birthdate: " ",
         gender: " "
     }
+    personUser.password = await bcrypt.hash(password, saltRounds);
+
     try {
         await addPersonUser(personUser);
         response.sendStatus(StatusCodes.OK);
