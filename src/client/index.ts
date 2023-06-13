@@ -1,6 +1,6 @@
 import {fetchRestEndpoint} from "./utils/client-server.js";
 import {PersonUser} from "../server/data/person-user";
-const btnCreate = document.getElementById("createUserButton");
+const btnCreate = document.getElementById("createUserButton") as HTMLButtonElement;
 const editBtn = document.getElementById("editUserButton") as HTMLButtonElement;
 const loginStatus = document.getElementById("loginStatus");
 const loginError = document.getElementById("loginError");
@@ -23,7 +23,9 @@ if(sessionStorage.getItem("user-name") !== null){
     }
 }
 
-
+if(sessionStorage.getItem("user-name") !== null){
+    btnCreate.disabled = false;
+}
 
 
 btnCreate.addEventListener("click", async function (){
