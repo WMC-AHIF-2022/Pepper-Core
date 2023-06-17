@@ -2,13 +2,17 @@ import express from "express";
 import {StatusCodes} from "http-status-codes";
 import {PersonUser} from "../data/person-user";
 import {addPersonUser, updatePersonUser} from "../data/person-user-repository";
-import {isAuthorized,getUserDetails} from "../data/person-user-repository";
+import {isAuthorized,getUserDetails, getAllPersonUsers} from "../data/person-user-repository";
 import {DB} from "../database";
 import bcrypt from "bcrypt";
+import jwt from 'jsonwebtoken'
+import {isAuthenticated1} from "../middleware/auth-handler";
 
 export const personUserRouter = express.Router();
 
 export const saltRounds: number = 8;
+
+export const secretKey = "hvzfjkbbj5h7bniuhiuuq4asbjkfnejwnfjn="
 
 personUserRouter.get("/:username", async function (request, response) {
     const username = request.params.username;
@@ -37,6 +41,7 @@ personUserRouter.post("/signup", async function (request, response) {
     personUser.password = await bcrypt.hash(password, saltRounds);
 
     try {
+
         await addPersonUser(personUser);
         response.sendStatus(StatusCodes.OK);
     }
@@ -62,7 +67,10 @@ personUserRouter.post("/login", async function (request, response) {
 
     const isUserAuthorized: boolean = await isAuthorized(personUser);
     if (isUserAuthorized){
-        response.sendStatus(StatusCodes.OK);
+        const user = {username: username}
+        const token = jwt.sign(user, secretKey, {expiresIn: '30m'});
+        console.log(token);
+        response.status(StatusCodes.OK).json({accessToken: token});
     }
     else {
         response.sendStatus(StatusCodes.UNAUTHORIZED);
@@ -77,12 +85,15 @@ personUserRouter.put("/:username", async function (request, response) {
     const gender: string = request.body.gender;
 
     try {
-        console.log("1");
         await updatePersonUser(firstName, lastName, birthdate, gender, username);
-        console.log("FERTIG!!!!!!!");
         response.sendStatus(StatusCodes.OK);
     }
     catch (e) {
         response.sendStatus(StatusCodes.BAD_REQUEST);
     }
+});
+
+personUserRouter.get("/", isAuthenticated1, async function (request, response) {
+    const allPersonUsers: PersonUser[] = await getAllPersonUsers();
+    response.status(StatusCodes.OK).json(allPersonUsers);
 });

@@ -3,7 +3,11 @@ import {StatusCodes} from "http-status-codes";
 import {Picture} from "../data/picture";
 import {addPicture} from "../data/pictures-repository";
 import {DB} from "../database";
+import {isAuthenticated1} from "../middleware/auth-handler";
 export const pictureRouter = express.Router();
+
+// @ts-ignore
+pictureRouter.use(isAuthenticated1);
 
 pictureRouter.post("/:username", async function (request, response) {
     const url: string = request.body.url;

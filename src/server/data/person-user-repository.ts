@@ -52,3 +52,12 @@ export async function isAuthorized(personUser: PersonUser): Promise<boolean>{
     const valid: boolean = await bcrypt.compare(personUser.password, result.password);
     return valid;
 }
+
+export async function getAllPersonUsers() {
+    const db = await  DB.createDBConnection();
+    const stmt = await db.prepare(`SELECT * FROM personsUsers`);
+    const result: PersonUser[] = await stmt.all<PersonUser[]>();
+    await stmt.finalize();
+    await db.close();
+    return result;
+}
