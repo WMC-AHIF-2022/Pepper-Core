@@ -130,6 +130,8 @@ fileInput.addEventListener('change', async function (e) {
     }
 });
 async function createUser() {
+
+
     try {
         loginError.innerHTML = " ";
         loginStatus.innerHTML = " ";

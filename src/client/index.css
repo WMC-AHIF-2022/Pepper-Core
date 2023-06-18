@@ -6,8 +6,8 @@
     font-size: 220%;
 }
 #editUserButton{
-    margin-top: 20%;
-    margin-left: -29%;
+    margin-top: 24%;
+    margin-left: -28.7%;
 }
 #inputFirstName {
     width: 100%;
@@ -72,6 +72,23 @@ h1 {
     margin-top: 2%;
     font-size: 150%;
     border-radius: 10px;
+}
+
+.textflo{
+    margin-left: 3%;
+    margin-right: 30%;
+}
+.textdavid{
+    margin-left: 20%;
+    margin-right: 25%;
+}
+.david{
+    margin-left: 3%;
+    margin-top: -17%;
+}
+.flo{
+    margin-top: -15%;
+    margin-left: 78%;
 }
 
 .grid-container {
