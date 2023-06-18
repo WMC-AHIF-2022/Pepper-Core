@@ -4,10 +4,11 @@ import {Picture} from "../data/picture";
 import {addPicture} from "../data/pictures-repository";
 import {DB} from "../database";
 import {isAuthenticated1} from "../middleware/auth-handler";
+import * as fs from "fs";
 export const pictureRouter = express.Router();
 
 // @ts-ignore
-pictureRouter.use(isAuthenticated1);
+//pictureRouter.use(isAuthenticated1);
 
 pictureRouter.post("/:username", async function (request, response) {
     const url: string = request.body.url;
@@ -25,6 +26,21 @@ pictureRouter.post("/:username", async function (request, response) {
     catch (e) {
         response.sendStatus(StatusCodes.BAD_REQUEST);
     }
+});
+
+pictureRouter.post("/upload", async function (request, response) {
+    //const base64ImageData = request.body.image;
+
+    console.log("am ziel angekommen");
+
+
+    // Hier kannst du die Base64-Zeichenkette weiterverarbeiten
+    // z.B. speichern in einer Datenbank oder auf dem Dateisystem
+
+    // Beispiel: Bild als Zeichenkette in der Konsole ausgeben
+    //console.log(base64ImageData);
+
+    response.sendStatus(StatusCodes.OK);
 });
 
 pictureRouter.get("/:username", async (request, response) => {

@@ -1,5 +1,4 @@
 import {fetchRestEndpoint} from "./utils/client-server.js";
-import {PersonUser} from "../server/data/person-user";
 const btnCreate = document.getElementById("createUserButton") as HTMLButtonElement;
 const editBtn = document.getElementById("editUserButton") as HTMLButtonElement;
 const loginStatus = document.getElementById("loginStatus");
@@ -36,14 +35,10 @@ btnCreate.addEventListener("click", async function (){
     }
 });
 
-//https://runebook.dev/de/docs/html/element/input/file
-//document.getElementById("profilePicture").addEventListener('change', dateiauswahl, false)
-
 async function createUser() {
     try {
         loginError.innerHTML = " ";
         loginStatus.innerHTML = " ";
-
 
         const fName = elementFirstName.value;
 
@@ -56,11 +51,68 @@ async function createUser() {
         const userName = sessionStorage.getItem('user-name');
         const userPassword = sessionStorage.getItem('user-password');
 
+
+
+        ////////////////////////////////////////
+        const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+
+        alert("1");
+        const file = fileInput.files[0]; // Das ausgewählte Bild
+        alert("2");
+        if (file) {
+            alert("3");
+
+            // Datei als URL-Objekt erstellen
+            const fileReader = new FileReader();
+
+            alert("4");
+
+            fileReader.onload = async () => {
+                alert("5");
+
+                const imageUrl = fileReader.result as string;
+                alert("6");
+
+
+                // Bild als Base64-Zeichenkette erhalten
+                const base64ImageData = imageUrl.split(',')[1];
+                alert("7");
+
+                fetch('/api/pictures/upload', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ image: base64ImageData })
+                }).then(response => {
+                    if (response.ok) {
+                        alert('Bild erfolgreich hochgeladen und gespeichert.');
+                    } else {
+                        alert('Fehler beim Hochladen und Speichern des Bildes.');
+                    }
+                }).catch(error => {
+                    console.log('Fehler beim Senden der Anfrage:', error);
+                });
+            };
+            alert("9");
+
+            fileReader.readAsDataURL(file);
+            alert("10");
+
+        }
+        ////////////////////////////////////////////////
+
         const data = {firstName: fName, lastName: lastName,birthdate: birthdate, gender: gender};
         await fetchRestEndpoint(`http://localhost:3000/api/personUser/${userName}`, "PUT", data);
+
         loginStatus.innerHTML = "erfolgreich erstellt";
-        window.location.href = "/pages/viewUser/viewUser.html";
+        //window.location.href = "/pages/viewUser/viewUser.html";
     } catch (e) {
         loginError.innerHTML = `Create failed: ${e}`;
     }
 }
+
+
+//https://runebook.dev/de/docs/html/element/input/file
+//document.getElementById("profilePicture").addEventListener('change', dateiauswahl, false)
+
