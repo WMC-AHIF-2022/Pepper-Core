@@ -33,11 +33,8 @@ pictureRouter.post("/", async function (request, response) {
         username: username,
         profilePicture: profilePicture
     }
-    console.log(picture);
     try {
-        console.log("1")
         await addPicture(picture);
-        console.log("2")
         response.sendStatus(StatusCodes.OK);
     }
     catch (e) {
@@ -46,7 +43,6 @@ pictureRouter.post("/", async function (request, response) {
 });
 
 pictureRouter.get("/:username", async (request, response) => {
-    console.log("4")
     const username: string = request.params.username;
     const db = await  DB.createDBConnection();
     const stmt = await db.prepare(`SELECT * FROM pictures WHERE username = ?1`);
@@ -54,8 +50,6 @@ pictureRouter.get("/:username", async (request, response) => {
     const result: Picture[] | undefined = await stmt.all<Picture[]>();
     await stmt.finalize();
     await db.close();
-    console.log(result)
-    console.log("2")
     response.status(StatusCodes.OK).json(result);
 });
 
