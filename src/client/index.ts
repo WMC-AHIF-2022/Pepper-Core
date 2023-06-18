@@ -101,36 +101,19 @@ async function fetchSecondPicture() {
 
 async function fetchThirdPicture() {
     let reader = new FileReader();
-    alert("1");
-    console.log(fileInputMore.files);
-    alert("2");
     const file = fileInputMore.files[2];
-    alert("3");
     const imageType = /image.*/;
-    alert("4");
     if (file.type.match(imageType)) {
-        alert("5");
         reader.onload = async function (e) {
-            alert("6");
             fileDisplayAreaMore.innerHTML = "";
-            alert("7");
             const img = new Image();
-            alert("8");
             if (typeof reader.result === "string") {
-                alert("9");
                 img.src = reader.result;
-                alert("10");
             }
-            console.log(sessionStorage.getItem("user-name") + "1");
-            alert("11");
             const data = {url: reader.result, username: sessionStorage.getItem("user-name"),profilePicture:"false"};
-            alert("12");
             await fetchRestEndpoint(`/api/pictures`, "POST", data);
-            alert("13");
         }
-        alert("14");
         reader.readAsDataURL(file);
-        alert("15");
     } else {
         fileDisplayAreaMore.innerHTML = "File not supported!"
     }
@@ -186,7 +169,6 @@ fileInput.addEventListener('change', async function (e) {
                 sessionStorage.setItem("reader-result", reader.result);
                 img.src = reader.result;
             }
-            console.log(sessionStorage.getItem("user-name") + "3");
             const data = {url: reader.result, username: sessionStorage.getItem("user-name"),profilePicture:"true"};
             await fetchRestEndpoint(`/api/pictures`, "POST", data);
         }
