@@ -29,7 +29,8 @@ export class DB {
             CREATE TABLE IF NOT EXISTS pictures (
                 pictureID INTEGER PRIMARY KEY,
                 url NOT NULL,
-                username NOT NULL
+                username NOT NULL,
+                profilePicture NOT NULL
             ) 
         `);
     }

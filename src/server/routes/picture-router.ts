@@ -1,21 +1,20 @@
 import express from "express";
 import {StatusCodes} from "http-status-codes";
 import {Picture} from "../data/picture";
-import {addPicture} from "../data/pictures-repository";
+import {addPicture,deleteTablePictures} from "../data/pictures-repository";
 import {DB} from "../database";
 import {isAuthenticated1} from "../middleware/auth-handler";
 import * as fs from "fs";
 export const pictureRouter = express.Router();
 
-
 pictureRouter.post("/:username", async function (request, response) {
     const url: string = request.body.url;
     const username: string = request.params.username;
-
     const picture: Picture = {
         pictureID: -1,
         url: url,
-        username: username
+        username: username,
+        profilePicture: "-1"
     }
     try {
         await addPicture(picture);
@@ -29,11 +28,12 @@ pictureRouter.post("/:username", async function (request, response) {
 pictureRouter.post("/", async function (request, response) {
     const url: string = request.body.url;
     const username: string = request.body.username;
-
+    const profilePicture:string = request.body.profilePicture;
     const picture: Picture = {
         pictureID: -1,
         url: url,
-        username: username
+        username: username,
+        profilePicture: profilePicture
     }
     try {
         console.log("1")
@@ -57,6 +57,7 @@ pictureRouter.post("/", async function (request, response) {
 });
 
 pictureRouter.get("/:username", async (request, response) => {
+    console.log("4")
     const username: string = request.params.username;
     const db = await  DB.createDBConnection();
     const stmt = await db.prepare(`SELECT * FROM pictures WHERE username = ?1`);
@@ -64,6 +65,8 @@ pictureRouter.get("/:username", async (request, response) => {
     const result: Picture[] | undefined = await stmt.all<Picture[]>();
     await stmt.finalize();
     await db.close();
+    console.log(result)
+    console.log("2")
     response.status(StatusCodes.OK).json(result);
 });
 
