@@ -1,4 +1,5 @@
 import {fetchRestEndpoint} from "./utils/client-server.js";
+//import {Picture} from "../server/data/picture";
 const btnCreate = document.getElementById("createUserButton") as HTMLButtonElement;
 const editBtn = document.getElementById("editUserButton") as HTMLButtonElement;
 const loginStatus = document.getElementById("loginStatus");
@@ -7,6 +8,11 @@ const elementFirstName = <HTMLInputElement>document.getElementById("inputFirstNa
 const elementLastName = <HTMLInputElement>document.getElementById("inputLastName");
 const elementBirthdate = <HTMLInputElement>document.getElementById("inputBirthdate");
 const elementGender = <HTMLInputElement>document.getElementById("inputGender");
+interface Picture {
+    pictureID: number;
+    url: string;
+    username: string;
+}
 
 if(sessionStorage.getItem("user-name") !== null){
     const user = await fetchRestEndpoint(`/api/personUser/${sessionStorage.getItem("user-name")}`,"GET").then(r => r.json());
@@ -35,6 +41,42 @@ btnCreate.addEventListener("click", async function (){
     }
 });
 
+var fileInput = document.getElementById('formFileProfilePictureInput') as HTMLInputElement;
+var fileDisplayArea = document.getElementById('fileDisplayArea');
+
+
+fileInput.addEventListener('change', async function (e) {
+    var file = fileInput.files[0];
+    var imageType = /image.*/;
+    if (file.type.match(imageType)) {
+        var reader = new FileReader();
+
+        reader.onload = async function (e) {
+            fileDisplayArea.innerHTML = "";
+            var img = new Image();
+            if (typeof reader.result === "string") {
+                img.src = reader.result;
+            }
+            //fileDisplayArea.appendChild(img);
+            const data = {url: reader.result, username: sessionStorage.getItem("user-name")};
+            await fetchRestEndpoint(`/api/pictures`, "POST", data);
+        }
+
+        reader.readAsDataURL(file);
+    } else {
+        fileDisplayArea.innerHTML = "File not supported!"
+    }
+    const pic:Picture[] = await fetchRestEndpoint(`/api/pictures/${sessionStorage.getItem("user-name")}`, "GET").then(r => r.json());
+    for(let i = 0;i < pic.length;i++){
+        if (typeof reader.result === "string") {
+            var img = new Image();
+            img.src = pic[i].url;
+        }
+        fileDisplayArea.appendChild(img)
+    }
+
+});
+
 async function createUser() {
     try {
         loginError.innerHTML = " ";
@@ -50,57 +92,6 @@ async function createUser() {
 
         const userName = sessionStorage.getItem('user-name');
         const userPassword = sessionStorage.getItem('user-password');
-
-
-
-        ////////////////////////////////////////
-        const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-
-        alert("1");
-        const file = fileInput.files[0]; // Das ausgewählte Bild
-        alert("2");
-        if (file) {
-            alert("3");
-
-            // Datei als URL-Objekt erstellen
-            const fileReader = new FileReader();
-
-            alert("4");
-
-            fileReader.onload = async () => {
-                alert("5");
-
-                const imageUrl = fileReader.result as string;
-                alert("6");
-
-
-                // Bild als Base64-Zeichenkette erhalten
-                const base64ImageData = imageUrl.split(',')[1];
-                alert("7");
-
-                fetch('/api/pictures/upload', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ image: base64ImageData })
-                }).then(response => {
-                    if (response.ok) {
-                        alert('Bild erfolgreich hochgeladen und gespeichert.');
-                    } else {
-                        alert('Fehler beim Hochladen und Speichern des Bildes.');
-                    }
-                }).catch(error => {
-                    console.log('Fehler beim Senden der Anfrage:', error);
-                });
-            };
-            alert("9");
-
-            fileReader.readAsDataURL(file);
-            alert("10");
-
-        }
-        ////////////////////////////////////////////////
 
         const data = {firstName: fName, lastName: lastName,birthdate: birthdate, gender: gender};
         await fetchRestEndpoint(`http://localhost:3000/api/personUser/${userName}`, "PUT", data);

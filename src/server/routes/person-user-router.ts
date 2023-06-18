@@ -15,6 +15,13 @@ export const saltRounds: number = 8;
 
 export const secretKey = "hvzfjkbbj5h7bniuhiuuq4asbjkfnejwnfjn="
 
+personUserRouter.delete("/",async function (request,response){
+    const db = await DB.createDBConnection();
+    await db.all(`truncate table personsUsers`);
+    await db.close();
+    response.status(StatusCodes.OK);
+})
+
 personUserRouter.get("/:username", async function (request, response) {
     const username = request.params.username;
     const db = await  DB.createDBConnection();

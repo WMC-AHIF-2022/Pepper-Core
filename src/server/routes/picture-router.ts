@@ -7,8 +7,6 @@ import {isAuthenticated1} from "../middleware/auth-handler";
 import * as fs from "fs";
 export const pictureRouter = express.Router();
 
-// @ts-ignore
-//pictureRouter.use(isAuthenticated1);
 
 pictureRouter.post("/:username", async function (request, response) {
     const url: string = request.body.url;
@@ -28,10 +26,27 @@ pictureRouter.post("/:username", async function (request, response) {
     }
 });
 
-pictureRouter.post("/upload", async function (request, response) {
-    //const base64ImageData = request.body.image;
+pictureRouter.post("/", async function (request, response) {
+    const url: string = request.body.url;
+    const username: string = request.body.username;
 
-    console.log("am ziel angekommen");
+    const picture: Picture = {
+        pictureID: -1,
+        url: url,
+        username: username
+    }
+    try {
+        console.log("1")
+        await addPicture(picture);
+        console.log("2")
+        response.sendStatus(StatusCodes.OK);
+    }
+    catch (e) {
+        response.sendStatus(StatusCodes.BAD_REQUEST);
+    }
+    //console.log("am ziel angekommen");
+    //console.log(base64ImageData);
+    //alert(base64ImageData);
 
 
     // Hier kannst du die Base64-Zeichenkette weiterverarbeiten
@@ -39,8 +54,6 @@ pictureRouter.post("/upload", async function (request, response) {
 
     // Beispiel: Bild als Zeichenkette in der Konsole ausgeben
     //console.log(base64ImageData);
-
-    response.sendStatus(StatusCodes.OK);
 });
 
 pictureRouter.get("/:username", async (request, response) => {
@@ -48,6 +61,15 @@ pictureRouter.get("/:username", async (request, response) => {
     const db = await  DB.createDBConnection();
     const stmt = await db.prepare(`SELECT * FROM pictures WHERE username = ?1`);
     await stmt.bind({1: username});
+    const result: Picture[] | undefined = await stmt.all<Picture[]>();
+    await stmt.finalize();
+    await db.close();
+    response.status(StatusCodes.OK).json(result);
+});
+
+pictureRouter.get("/", async (request, response) => {
+    const db = await  DB.createDBConnection();
+    const stmt = await db.prepare(`SELECT * FROM pictures`);
     const result: Picture[] | undefined = await stmt.all<Picture[]>();
     await stmt.finalize();
     await db.close();
