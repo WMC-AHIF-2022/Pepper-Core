@@ -6,14 +6,12 @@ const elementFirstName = <HTMLInputElement>document.getElementById("inputFirstNa
 const elementLastName = <HTMLInputElement>document.getElementById("inputLastName");
 const elementBirthdate = <HTMLInputElement>document.getElementById("inputBirthdate");
 const elementGender = <HTMLInputElement>document.getElementById("inputGender");
-
 interface Picture {
     pictureID: number;
     url: string;
     username: string;
     profilePicture: string;
 }
-
 if(sessionStorage.getItem("user-name") !== null){
     const user = await fetchRestEndpoint(`/api/personUser/${sessionStorage.getItem("user-name")}`,"GET").then(r => r.json());
     if(user.firstName === ' '){
@@ -27,11 +25,9 @@ if(sessionStorage.getItem("user-name") !== null){
         elementGender.value = user.gender;
     }
 }
-
 if(sessionStorage.getItem("user-name") !== null){
     btnCreate.disabled = false;
 }
-
 btnCreate.addEventListener("click", async function (){
     if(sessionStorage.getItem("user-name") !== null){
         await createUser();
@@ -40,19 +36,16 @@ btnCreate.addEventListener("click", async function (){
         alert("You have to SignUp/Login before you can create your User!");
     }
 });
-
 const fileInput = document.getElementById('formFileProfilePictureInput') as HTMLInputElement;
 const fileDisplayArea = document.getElementById('fileDisplayArea');
 const fileInputMore = document.getElementById('formFileMultipleMemoryPictureInput') as HTMLInputElement;
 const fileDisplayAreaMore = document.getElementById('fileDisplayAreaMore');
-
 fileInputMore.addEventListener('change',  async function (e) {
     await fetchFirstPicture();
     await fetchSecondPicture();
     await fetchThirdPicture();
     await fetchFourthPicture()
 });
-
 //memory picture
 async function fetchFirstPicture() {
 
@@ -74,7 +67,6 @@ async function fetchFirstPicture() {
         fileDisplayAreaMore.innerHTML = "File not supported!"
     }
 }
-
 async function fetchSecondPicture() {
     let reader = new FileReader();
     const file = fileInputMore.files[1];
@@ -94,7 +86,6 @@ async function fetchSecondPicture() {
         fileDisplayAreaMore.innerHTML = "File not supported!"
     }
 }
-
 async function fetchThirdPicture() {
     let reader = new FileReader();
     const file = fileInputMore.files[2];
@@ -114,7 +105,6 @@ async function fetchThirdPicture() {
         fileDisplayAreaMore.innerHTML = "File not supported!"
     }
 }
-
 async function fetchFourthPicture() {
     let reader = new FileReader();
     const file = fileInputMore.files[3];
@@ -134,7 +124,6 @@ async function fetchFourthPicture() {
         fileDisplayAreaMore.innerHTML = "File not supported!"
     }
 }
-
 //profile picture
 fileInput.addEventListener('change', async function (e) {
     const file = fileInput.files[0];
@@ -156,7 +145,6 @@ fileInput.addEventListener('change', async function (e) {
         fileDisplayArea.innerHTML = "File not supported!"
     }
 });
-
 async function createUser() {
     try {
         loginError.innerHTML = " ";
@@ -182,8 +170,3 @@ async function createUser() {
         loginError.innerHTML = `Create failed: ${e}`;
     }
 }
-
-
-//https://runebook.dev/de/docs/html/element/input/file
-//document.getElementById("profilePicture").addEventListener('change', dateiauswahl, false)
-

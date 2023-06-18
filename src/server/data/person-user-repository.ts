@@ -1,9 +1,6 @@
 import {PersonUser} from "./person-user";
 import {DB} from "../database";
-import {StatusCodes} from "http-status-codes";
 import bcrypt from "bcrypt";
-
-import {saltRounds} from "../routes/person-user-router";
 
 export async function getUserDetails(username:string):Promise<PersonUser|undefined>{
     const db = await  DB.createDBConnection();
@@ -52,7 +49,6 @@ export async function isAuthorized(personUser: PersonUser): Promise<boolean>{
     const valid: boolean = await bcrypt.compare(personUser.password, result.password);
     return valid;
 }
-
 export async function getAllPersonUsers() {
     const db = await  DB.createDBConnection();
     const stmt = await db.prepare(`SELECT * FROM personsUsers`);

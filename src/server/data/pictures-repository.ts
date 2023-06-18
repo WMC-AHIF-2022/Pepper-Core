@@ -8,16 +8,9 @@ export async function addPicture(picture: Picture) {
     const operationResult = await stmt.run();
     await stmt.finalize();
     await db.close();
-
     if (typeof operationResult.changes !== "number" || operationResult.changes !== 1) {
         throw new Error("Adding Picture Error!");
     } else {
         picture.pictureID = operationResult.lastID!;
     }
-}
-
-export async function deleteTablePictures(){
-    const db = await DB.createDBConnection();
-    await db.exec('DROP TABLE pictures');
-    await db.close();
 }

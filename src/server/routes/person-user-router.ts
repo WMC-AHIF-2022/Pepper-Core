@@ -6,7 +6,6 @@ import {isAuthorized,getUserDetails, getAllPersonUsers} from "../data/person-use
 import {DB} from "../database";
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken'
-import {isAuthenticated1} from "../middleware/auth-handler";
 import * as fs from "fs";
 
 export const personUserRouter = express.Router();
@@ -36,7 +35,6 @@ personUserRouter.get("/:username", async function (request, response) {
 personUserRouter.post("/signup", async function (request, response) {
     const username: string = request.body.username;
     const password: string = request.body.password;
-
     const personUser: PersonUser = {
         id: 0,
         username: username,
@@ -47,9 +45,7 @@ personUserRouter.post("/signup", async function (request, response) {
         gender: " "
     }
     personUser.password = await bcrypt.hash(password, saltRounds);
-
     try {
-
         await addPersonUser(personUser);
         response.sendStatus(StatusCodes.OK);
     }
@@ -61,7 +57,6 @@ personUserRouter.post("/signup", async function (request, response) {
 personUserRouter.post("/login", async function (request, response) {
     const username: string = request.body.username;
     const password: string = request.body.password;
-
     const personUser: PersonUser = {
         id: 0,
         username: username,
@@ -71,13 +66,10 @@ personUserRouter.post("/login", async function (request, response) {
         birthdate: " ",
         gender: " "
     }
-
-
     const isUserAuthorized: boolean = await isAuthorized(personUser);
     if (isUserAuthorized){
         const user = {username: username}
         const token = jwt.sign(user, secretKey, {expiresIn: '30m'});
-        console.log(token);
         response.status(StatusCodes.OK).json({accessToken: token});
     }
     else {
@@ -109,38 +101,23 @@ personUserRouter.get("/", async function (request, response) {
 
 personUserRouter.post("/:username", async function (request, response) {
     const username: string = request.params.username;
-
     const createFolder = (folderName: string) => {
-        // Überprüfe, ob der Ordner bereits existiert
         if (!fs.existsSync(folderName)) {
-            // Erstelle den Ordner
             fs.mkdirSync(folderName);
-            console.log(`Der Ordner ${folderName} wurde erfolgreich erstellt.`);
-        } else {
-            console.log(`Der Ordner ${folderName} existiert bereits.`);
         }
     }
-
     const moveFolder = (sourcePath: string, destinationPath: string) => {
-        // Überprüfe, ob der Quellordner existiert
         if (fs.existsSync(sourcePath)) {
-            // Versuche, den Ordner zu verschieben
             try {
                 fs.renameSync(sourcePath, destinationPath);
-                console.log(`Der Ordner wurde erfolgreich von ${sourcePath} nach ${destinationPath} verschoben.`);
             } catch (error) {
                 console.error(`Beim Verschieben des Ordners ist ein Fehler aufgetreten: ${error}`);
             }
-        } else {
-            console.log(`Der Quellordner ${sourcePath} existiert nicht.`);
         }
     };
-
     createFolder(username);
-
     const sourcePath = `${username}`;
     const destinationPath = `./src/client/memoryPictures/${username}`;
     moveFolder(sourcePath, destinationPath);
-
     response.sendStatus(StatusCodes.OK);
 });
