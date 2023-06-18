@@ -22,10 +22,29 @@ const imgItemTwo = document.getElementById("imgItemTwo") as HTMLImageElement;
 const imgItemThree = document.getElementById("imgItemThree") as HTMLImageElement;
 const imgItemFour = document.getElementById("imgItemFour") as HTMLImageElement;
 
-const data: Picture[] = await fetchRestEndpoint( `/api/pictures/${user.username}`, "GET").then(r => r.json());
-imgItemOne.src = `../../memoryPictures/${data[0].url}`;
-imgItemTwo.src = `../../memoryPictures/${data[1].url}`;
-imgItemThree.src = `../../memoryPictures/${data[2].url}`;
-imgItemFour.src = `../../memoryPictures/${data[3].url}`;
+const profilePictureImage = document.getElementById("profilePicture") as HTMLImageElement;
+
+console.log(sessionStorage.getItem("user-name") + "4");
+const pic:Picture[] = await fetchRestEndpoint(`/api/pictures/${sessionStorage.getItem("user-name")}`, "GET").then(r => r.json());
+let img;
+console.log(pic);
+const reader = sessionStorage.getItem("reader-result");
+for(let i = 0;i < pic.length;i++){
+    if (typeof reader === "string") {
+        img = new Image();
+        img.src = pic[i].url;
+        if (i === 0) {
+            profilePictureImage.src = img.src;
+        } else if (i === 1) {
+            imgItemOne.src = img.src;
+        } else if (i === 2) {
+            imgItemTwo.src = img.src;
+        } else if (i === 3) {
+            imgItemThree.src = img.src;
+        } else if (i === 4) {
+            imgItemFour.src = img.src;
+        }
+    }
+}
 
 

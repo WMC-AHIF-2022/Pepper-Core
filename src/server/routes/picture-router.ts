@@ -29,12 +29,16 @@ pictureRouter.post("/", async function (request, response) {
     const url: string = request.body.url;
     const username: string = request.body.username;
     const profilePicture:string = request.body.profilePicture;
+    console.log(url);
+    console.log(profilePicture);
+    console.log(username);
     const picture: Picture = {
         pictureID: -1,
         url: url,
         username: username,
         profilePicture: profilePicture
     }
+    console.log(picture);
     try {
         console.log("1")
         await addPicture(picture);
