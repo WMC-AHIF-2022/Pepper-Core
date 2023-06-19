@@ -1,10 +1,10 @@
 import {fetchRestEndpoint} from "./utils/client-server.js";
 import {Picture} from "../server/data/picture";
 const editBtn = document.getElementById("editUserButton") as HTMLButtonElement;
-const elementFirstName = <HTMLInputElement>document.getElementById("inputFirstName");
-const elementLastName = <HTMLInputElement>document.getElementById("inputLastName");
-const elementBirthdate = <HTMLInputElement>document.getElementById("inputBirthdate");
-const elementGender = <HTMLInputElement>document.getElementById("inputGender");
+const elementFirstName = <HTMLInputElement>document.getElementById("inputFirstName2");
+const elementLastName = <HTMLInputElement>document.getElementById("inputLastName2");
+const elementBirthdate = <HTMLInputElement>document.getElementById("inputBirthdate2");
+const elementGender = <HTMLInputElement>document.getElementById("inputGender2");
 const user = await fetchRestEndpoint(`/api/personUser/${sessionStorage.getItem("user-name")}`,"GET").then(r => r.json());
 elementFirstName.value = user.firstName;
 elementLastName.value = user.lastName;
@@ -21,9 +21,7 @@ const imgItemFour = document.getElementById("imgItemFour") as HTMLImageElement;
 const profilePictureImage = document.getElementById("profilePicture") as HTMLImageElement;
 const pic:Picture[] = await fetchRestEndpoint(`/api/pictures/${sessionStorage.getItem("user-name")}`, "GET").then(r => r.json());
 let img;
-const reader = sessionStorage.getItem("reader-result");
 for(let i = 0;i < pic.length;i++){
-    if (typeof reader === "string") {
         img = new Image();
         img.src = pic[i].url;
         if (i === 0) {
@@ -37,5 +35,4 @@ for(let i = 0;i < pic.length;i++){
         } else if (i === 4) {
             imgItemFour.src = img.src;
         }
-    }
 }
