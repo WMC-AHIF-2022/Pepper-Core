@@ -5,6 +5,11 @@ const elementFirstName = <HTMLInputElement>document.getElementById("inputFirstNa
 const elementLastName = <HTMLInputElement>document.getElementById("inputLastName2");
 const elementBirthdate = <HTMLInputElement>document.getElementById("inputBirthdate2");
 const elementGender = <HTMLInputElement>document.getElementById("inputGender2");
+const logoutBtn = <HTMLButtonElement>document.getElementById("logoutBtn");
+logoutBtn.addEventListener("click",function() {
+    sessionStorage.clear();
+    window.location.href = "/pages/logIn-SignUp/LogIn-SignUp.html";
+});
 const user = await fetchRestEndpoint(`/api/personUser/${sessionStorage.getItem("user-name")}`,"GET").then(r => r.json());
 elementFirstName.value = user.firstName;
 elementLastName.value = user.lastName;

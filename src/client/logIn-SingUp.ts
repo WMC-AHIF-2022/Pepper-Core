@@ -5,6 +5,11 @@ const loginStatus = document.getElementById("loginStatus");
 const loginError = document.getElementById("loginError");
 btnSignup.addEventListener("click", async () => await signup());
 btnLogin.addEventListener("click", async () => await login());
+const logoutBtn = <HTMLButtonElement>document.getElementById("logoutBtn");
+logoutBtn.addEventListener("click",function() {
+    sessionStorage.clear();
+    window.location.href = "/pages/logIn-SignUp/LogIn-SignUp.html";
+});
 async function login() {
     try {
         loginStatus.innerHTML = "";

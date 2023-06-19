@@ -6,6 +6,11 @@ const elementFirstName = <HTMLInputElement>document.getElementById("inputFirstNa
 const elementLastName = <HTMLInputElement>document.getElementById("inputLastName");
 const elementBirthdate = <HTMLInputElement>document.getElementById("inputBirthdate");
 const elementGender = <HTMLInputElement>document.getElementById("inputGender");
+const logoutBtn = <HTMLButtonElement>document.getElementById("logoutBtn");
+logoutBtn.addEventListener("click",function() {
+    sessionStorage.clear();
+    window.location.href = "/pages/logIn-SignUp/LogIn-SignUp.html";
+});
 interface Picture {
     pictureID: number;
     url: string;
