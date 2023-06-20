@@ -7,12 +7,11 @@ import {DB} from "../database";
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken'
 import * as fs from "fs";
+import {secretKey} from "../middleware/auth-handler";
 
 export const personUserRouter = express.Router();
 
 export const saltRounds: number = 8;
-
-export const secretKey = "hvzfjkbbj5h7bniuhiuuq4asbjkfnejwnfjn="
 
 personUserRouter.delete("/",async function (request,response){
     const db = await DB.createDBConnection();
@@ -97,27 +96,4 @@ personUserRouter.put("/:username", async function (request, response) {
 personUserRouter.get("/", async function (request, response) {
     const allPersonUsers: PersonUser[] = await getAllPersonUsers();
     response.status(StatusCodes.OK).json(allPersonUsers);
-});
-
-personUserRouter.post("/:username", async function (request, response) {
-    const username: string = request.params.username;
-    const createFolder = (folderName: string) => {
-        if (!fs.existsSync(folderName)) {
-            fs.mkdirSync(folderName);
-        }
-    }
-    const moveFolder = (sourcePath: string, destinationPath: string) => {
-        if (fs.existsSync(sourcePath)) {
-            try {
-                fs.renameSync(sourcePath, destinationPath);
-            } catch (error) {
-                console.error(`Beim Verschieben des Ordners ist ein Fehler aufgetreten: ${error}`);
-            }
-        }
-    };
-    createFolder(username);
-    const sourcePath = `${username}`;
-    const destinationPath = `./src/client/memoryPictures/${username}`;
-    moveFolder(sourcePath, destinationPath);
-    response.sendStatus(StatusCodes.OK);
 });

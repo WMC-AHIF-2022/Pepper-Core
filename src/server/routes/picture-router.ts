@@ -62,9 +62,52 @@ pictureRouter.get("/", async (request, response) => {
     response.status(StatusCodes.OK).json(result);
 });
 
+pictureRouter.get("/profilePicture/:username", async (request, response) => {
+    const username: string = request.params.username;
+    const db = await  DB.createDBConnection();
+    const stmt = await db.prepare(`SELECT * FROM pictures where username = ?1 and profilePicture = "true"`);
+    await stmt.bind({1: username});
+    const result: Picture | undefined = await stmt.get<Picture>();
+    await stmt.finalize();
+    await db.close();
+
+    if (typeof result === "undefined") {
+        response.sendStatus(StatusCodes.BAD_REQUEST);
+    } else {
+        response.status(StatusCodes.OK).json(result);
+    }
+});
+
+pictureRouter.get("/memoryPictures/:username", async (request, response) => {
+    const username: string = request.params.username;
+    const db = await  DB.createDBConnection();
+    const stmt = await db.prepare(`SELECT * FROM pictures where username = ?1 and profilePicture = "false"`);
+    await stmt.bind({1: username});
+    const result: Picture[] | undefined = await stmt.all<Picture[]>();
+    await stmt.finalize();
+    await db.close();
+
+    if (typeof result === "undefined") {
+        response.sendStatus(StatusCodes.BAD_REQUEST);
+    } else {
+        response.status(StatusCodes.OK).json(result);
+    }
+});
+
 pictureRouter.delete("/", async function (request, response) {
     const db = await DB.createDBConnection();
     await db.all('truncate table pictures');
+    await db.close();
+    response.status(StatusCodes.OK);
+});
+
+pictureRouter.delete("/memoryPictures/:username", async function (request, response) {
+    const username: string = request.params.username;
+    const db = await DB.createDBConnection();
+    const stmt = await db.prepare('delete from pictures where username = ?1 and profilePicture = "false"');
+    await stmt.bind({1: username});
+    const result = await stmt.run();
+    await stmt.finalize();
     await db.close();
     response.status(StatusCodes.OK);
 });

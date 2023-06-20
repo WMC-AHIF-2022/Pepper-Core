@@ -20,7 +20,6 @@ async function login() {
         const password = elementPassword.value;
         const data = JSON.parse(`{"username": "${username}", "password": "${password}"}`);
         await fetchRestEndpoint("http://localhost:3000/api/personUser/login", "POST", data);
-        await fetchRestEndpoint(`http://localhost:3000/api/personUser/${username}`, "POST");
         sessionStorage.setItem('user-name', username);
         sessionStorage.setItem('user-password', password);
         loginStatus.innerHTML = "erfolgreich eingelogt";

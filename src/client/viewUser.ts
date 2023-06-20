@@ -1,5 +1,6 @@
 import {fetchRestEndpoint} from "./utils/client-server.js";
 import {Picture} from "../server/data/picture";
+import {response} from "express";
 const editBtn = document.getElementById("editUserButton") as HTMLButtonElement;
 const elementFirstName = <HTMLInputElement>document.getElementById("inputFirstName2");
 const elementLastName = <HTMLInputElement>document.getElementById("inputLastName2");
@@ -25,20 +26,30 @@ const imgItemTwo = document.getElementById("imgItemTwo") as HTMLImageElement;
 const imgItemThree = document.getElementById("imgItemThree") as HTMLImageElement;
 const imgItemFour = document.getElementById("imgItemFour") as HTMLImageElement;
 const profilePictureImage = document.getElementById("profilePicture") as HTMLImageElement;
-const pic:Picture[] = await fetchRestEndpoint(`/api/pictures/${sessionStorage.getItem("user-name")}`, "GET").then(r => r.json());
+const profilePicture = await fetchRestEndpoint(`/api/pictures/profilePicture/${sessionStorage.getItem("user-name")}`, "GET").then(r => r.json());
+const pic:Picture[] = await fetchRestEndpoint(`/api/pictures/memoryPictures/${sessionStorage.getItem("user-name")}`, "GET").then(r => r.json());
 let img;
 for(let i = 0;i < pic.length;i++){
         img = new Image();
         img.src = pic[i].url;
         if (i === 0) {
-            profilePictureImage.src = img.src;
-        } else if (i === 1) {
             imgItemOne.src = img.src;
-        } else if (i === 2) {
+        } else if (i === 1) {
             imgItemTwo.src = img.src;
-        } else if (i === 3) {
+        } else if (i === 2) {
             imgItemThree.src = img.src;
-        } else if (i === 4) {
+        } else if (i === 3) {
             imgItemFour.src = img.src;
         }
 }
+
+let profileImage = new Image();
+profileImage.src = profilePicture.url;
+profilePictureImage.src = profileImage.src;
+
+
+const deletePicturesBtn = document.getElementById("deletePicturesButton") as HTMLButtonElement;
+deletePicturesBtn.addEventListener("click", async function () {
+    await fetchRestEndpoint(`/api/pictures/memoryPictures/${sessionStorage.getItem("user-name")}`, "DELETE");
+    alert("Your memory pictures has been deleted");
+});

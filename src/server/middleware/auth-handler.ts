@@ -1,6 +1,7 @@
 import express, {NextFunction, Request, Response} from "express";
 import jwt from "jsonwebtoken";
-import {secretKey} from "../routes/person-user-router";
+
+export const secretKey = "hvzfjkbbj5h7bniuhiuuq4asbjkfnejwnfjn=";
 
 export const isAuthenticated1 = (req: Request,res: Response, next: NextFunction) => {
     try {
