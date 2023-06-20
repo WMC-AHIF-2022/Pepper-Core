@@ -50,6 +50,8 @@ profilePictureImage.src = profileImage.src;
 
 const deletePicturesBtn = document.getElementById("deletePicturesButton") as HTMLButtonElement;
 deletePicturesBtn.addEventListener("click", async function () {
-    await fetchRestEndpoint(`/api/pictures/memoryPictures/${sessionStorage.getItem("user-name")}`, "DELETE");
+    sessionStorage.setItem("memPictures","false");
     alert("Your memory pictures has been deleted");
+    window.location.href = "../../index.html";
+    await fetchRestEndpoint(`/api/pictures/memoryPictures/${sessionStorage.getItem("user-name")}`, "DELETE");
 });

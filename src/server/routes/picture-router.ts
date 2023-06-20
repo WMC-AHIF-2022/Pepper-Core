@@ -104,10 +104,11 @@ pictureRouter.delete("/", async function (request, response) {
 pictureRouter.delete("/memoryPictures/:username", async function (request, response) {
     const username: string = request.params.username;
     const db = await DB.createDBConnection();
-    const stmt = await db.prepare('delete from pictures where username = ?1 and profilePicture = "false"');
-    await stmt.bind({1: username});
+    const stmt = await db.prepare('delete from pictures where username = ?1 and profilePicture = ?2');
+    await stmt.bind({1: username,2:"false"});
     const result = await stmt.run();
     await stmt.finalize();
     await db.close();
+    console.log(result);
     response.status(StatusCodes.OK);
 });

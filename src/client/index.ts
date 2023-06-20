@@ -7,6 +7,8 @@ const elementLastName = <HTMLInputElement>document.getElementById("inputLastName
 const elementBirthdate = <HTMLInputElement>document.getElementById("inputBirthdate");
 const elementGender = <HTMLInputElement>document.getElementById("inputGender");
 const logoutBtn = <HTMLButtonElement>document.getElementById("logoutBtn");
+const fileInput = document.getElementById('formFileProfilePictureInput') as HTMLInputElement;
+const fileInputMore = document.getElementById('formFileMultipleMemoryPictureInput') as HTMLInputElement;
 logoutBtn.addEventListener("click",function() {
     sessionStorage.clear();
     window.location.href = "/pages/logIn-SignUp/LogIn-SignUp.html";
@@ -17,17 +19,21 @@ interface Picture {
     username: string;
     profilePicture: string;
 }
+sessionStorage.setItem("memPictures","false");
 if(sessionStorage.getItem("user-name") !== null){
     const user = await fetchRestEndpoint(`/api/personUser/${sessionStorage.getItem("user-name")}`,"GET").then(r => r.json());
-    if(user.firstName === ' '){
+    if(user.firstName === ' ' && sessionStorage.getItem("memPictures") === "false"){
         alert("You can create a User now!");
     }
-    else{
-        window.location.href = "/pages/viewUser/viewUser.html";
+    else if(user.firstName !== ' ' && sessionStorage.getItem("memPictures") === "false"){
+        fileInput.disabled = true;
         elementFirstName.value = user.lastName;
         elementLastName.value = user.lastName;
         elementBirthdate.value = user.birthdate;
         elementGender.value = user.gender;
+    }
+    else{
+        window.location.href = "/pages/viewUser/viewUser.html";
     }
 }
 if(sessionStorage.getItem("user-name") !== null){
@@ -41,99 +47,37 @@ btnCreate.addEventListener("click", async function (){
         alert("You have to SignUp/Login before you can create your User!");
     }
 });
-const fileInput = document.getElementById('formFileProfilePictureInput') as HTMLInputElement;
-const fileInputMore = document.getElementById('formFileMultipleMemoryPictureInput') as HTMLInputElement;
+
+
 fileInputMore.addEventListener('change',  async function (e) {
-    await fetchFirstPicture();
-    await fetchSecondPicture();
-    await fetchThirdPicture();
-    await fetchFourthPicture();
+    await fetchPicture(fileInputMore.files[0],"false");
+    await fetchPicture(fileInputMore.files[1],"false");
+    await fetchPicture(fileInputMore.files[2],"false");
+    await fetchPicture(fileInputMore.files[3],"false");
+    sessionStorage.setItem("memPictures","true");
     console.log("fetchen fertig");
 });
-//memory picture
-async function fetchFirstPicture() {
+fileInput.addEventListener('change', async function (e) {
+    await fetchPicture(fileInput.files[0],"true");
+});
+async function fetchPicture(file:File,profilePicture:String) {
+    let reader = new FileReader();
+    const imageType = /image.*/;
+    if (file.type.match(imageType)) {
+        reader.onload = async function (e) {
+            const img = new Image();
+            if (typeof reader.result === "string") {
+                img.src = reader.result;
+            }
+            const data = {url: reader.result, username: sessionStorage.getItem("user-name"), profilePicture: profilePicture};
 
-    let reader = new FileReader();
-    const file = fileInputMore.files[0];
-    const imageType = /image.*/;
-    if (file.type.match(imageType)) {
-        reader.onload = async function (e) {
-            const img = new Image();
-            if (typeof reader.result === "string") {
-                img.src = reader.result;
-            }
-            const data = {url: reader.result, username: sessionStorage.getItem("user-name"), profilePicture: "false"};
-            await fetchRestEndpoint(`/api/pictures`, "POST", data);
-        }
-        reader.readAsDataURL(file);
-    }
-}
-async function fetchSecondPicture() {
-    let reader = new FileReader();
-    const file = fileInputMore.files[1];
-    const imageType = /image.*/;
-    if (file.type.match(imageType)) {
-        reader.onload = async function (e) {
-            const img = new Image();
-            if (typeof reader.result === "string") {
-                img.src = reader.result;
-            }
-            const data = {url: reader.result, username: sessionStorage.getItem("user-name"),profilePicture:"false"};
-            await fetchRestEndpoint(`/api/pictures`, "POST", data);
-        }
-        reader.readAsDataURL(file);
-    }
-}
-async function fetchThirdPicture() {
-    let reader = new FileReader();
-    const file = fileInputMore.files[2];
-    const imageType = /image.*/;
-    if (file.type.match(imageType)) {
-        reader.onload = async function (e) {
-            const img = new Image();
-            if (typeof reader.result === "string") {
-                img.src = reader.result;
-            }
-            const data = {url: reader.result, username: sessionStorage.getItem("user-name"),profilePicture:"false"};
-            await fetchRestEndpoint(`/api/pictures`, "POST", data);
-        }
-        reader.readAsDataURL(file);
-    }
-}
-async function fetchFourthPicture() {
-    let reader = new FileReader();
-    const file = fileInputMore.files[3];
-    const imageType = /image.*/;
-    if (file.type.match(imageType)) {
-        reader.onload = async function (e) {
-            const img = new Image();
-            if (typeof reader.result === "string") {
-                img.src = reader.result;
-            }
-            const data = {url: reader.result, username: sessionStorage.getItem("user-name"),profilePicture:"false"};
             await fetchRestEndpoint(`/api/pictures`, "POST", data);
         }
         reader.readAsDataURL(file);
     }
 }
 //profile picture
-fileInput.addEventListener('change', async function (e) {
-    const file = fileInput.files[0];
-    const imageType = /image.*/;
-    let reader = new FileReader();
-    if (file.type.match(imageType)) {
-        reader.onload = async function (e) {
-            const img = new Image();
-            if (typeof reader.result === "string") {
-                sessionStorage.setItem("reader-result", reader.result);
-                img.src = reader.result;
-            }
-            const data = {url: reader.result, username: sessionStorage.getItem("user-name"),profilePicture:"true"};
-            await fetchRestEndpoint(`/api/pictures`, "POST", data);
-        }
-        reader.readAsDataURL(file);
-    }
-});
+
 async function createUser() {
 
 

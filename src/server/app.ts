@@ -2,6 +2,7 @@ import express from "express"
 import { join } from "path"
 import {pictureRouter} from "./routes/picture-router";
 import {personUserRouter} from "./routes/person-user-router";
+import cors from "cors";
 
 const app = express();
 //const bodyParser = require('body-parser');
@@ -15,6 +16,7 @@ app.use(express.static(path, options));
 //app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use("/api/pictures", pictureRouter);
 app.use("/api/personUser", personUserRouter);
+app.use(cors());
 
 
 const port = 3000;
