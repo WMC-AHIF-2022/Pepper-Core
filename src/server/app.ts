@@ -8,8 +8,8 @@ const app = express();
 
 const path = join(__dirname, "../client");
 const options = { extensions: ["html"] };
-app.use(express.json({limit: '25mb'}));
-app.use(express.urlencoded({limit: '25mb', extended: true}));
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb', extended: true}));
 app.use(express.static(path, options));
 //app.use(bodyParser.json({ limit: '50mb' }));
 //app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
