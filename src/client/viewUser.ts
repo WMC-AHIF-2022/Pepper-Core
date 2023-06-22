@@ -9,7 +9,7 @@ const elementGender = <HTMLInputElement>document.getElementById("inputGender2");
 const logoutBtn = <HTMLButtonElement>document.getElementById("logoutBtn");
 logoutBtn.addEventListener("click",function() {
     sessionStorage.clear();
-    window.location.href = "/pages/logIn-SignUp/LogIn-SignUp.html";
+    window.location.href = "pages/CreateandViewUser/CreateandViewUser.html";
 });
 const user = await fetchRestEndpoint(`/api/personUser/${sessionStorage.getItem("user-name")}`,"GET").then(r => r.json());
 elementFirstName.value = user.firstName;
