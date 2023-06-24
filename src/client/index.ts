@@ -8,7 +8,7 @@ btnLogin.addEventListener("click", async () => await login());
 const logoutBtn = <HTMLButtonElement>document.getElementById("logoutBtn");
 logoutBtn.addEventListener("click",function() {
     sessionStorage.clear();
-    window.location.href = "pages/CreateandViewUser/CreateandViewUser.html";
+    window.location.href = "index.html";
 });
 async function login() {
     try {
