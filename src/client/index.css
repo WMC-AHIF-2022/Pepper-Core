@@ -9,6 +9,14 @@
     margin-top: 24%;
     margin-left: -28.7%;
 }
+#deleteMemoryPictures{
+    margin-top: 2.6%;
+    margin-left: 1%;
+}
+#deleteProfilePicture{
+    margin-left: 15%;
+    margin-top: 5.5%;
+}
 #inputFirstName {
     font-size: 100%;
     max-width: 45%;
@@ -19,8 +27,8 @@
 }
 
 #profilePicture{
-    margin-left: 30%;
-    margin-top: -14%;
+    margin-left: 70%;
+    margin-top: -28%;
     height: 15%;
     width: 15%;
 }
@@ -128,7 +136,7 @@ h1 {
 #imgItemFour {
     width: 80%;
     height: 80%;
- }
+}
 
 
 #profilePictureTxt {
@@ -146,15 +154,15 @@ h1 {
 }
 
 #memoryPictureTxt {
-    margin-top: 2%;
+    margin-top: 0%;
     float: left;
     font-size: 110%;
     margin-left: 2%;
 }
 
 #formFileMultipleMemoryPictureInput {
-    margin-top: 4.2%;
-    margin-left: -24.5%;
+    margin-top: 2.5%;
+    margin-left: -25%;
     font-size: 110%;
     width: 35%;
     float: left;

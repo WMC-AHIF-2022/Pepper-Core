@@ -17,21 +17,22 @@ export class DB {
         await connection.run(`
             CREATE TABLE IF NOT EXISTS personsUsers (
                 id INTEGER PRIMARY KEY,
-                username NOT NULL,
-                password NOT NULL,
-                firstName NOT NULL,
-                lastName NOT NULL,
-                birthdate NOT NULL,
-                gender NOT NULL
+                username TEXT NOT NULL,
+                password TEXT NOT NULL,
+                firstName TEXT NOT NULL,
+                lastName TEXT NOT NULL,
+                birthdate TEXT NOT NULL,
+                gender TEXT NOT NULL
             )`
         );
         await connection.run(`
             CREATE TABLE IF NOT EXISTS pictures (
                 pictureID INTEGER PRIMARY KEY,
-                url NOT NULL,
-                username NOT NULL,
-                profilePicture NOT NULL
-            ) 
+                url TEXT NOT NULL,
+                username TEXT NOT NULL,
+                profilePicture TEXT NOT NULL,
+                constraint personsUsers foreign key (username) references personsUsers(username)
+            )
         `);
     }
 }
