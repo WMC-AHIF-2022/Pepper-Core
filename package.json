@@ -3,7 +3,11 @@
     "server-dev": "npx nodemon ./src/server/app.ts",
     "client-dev": "npx tsc --watch --project ./src/client",
     "prestart": "npx tsc --project ./src/client",
-    "start": "npx ts-node ./src/server/app.ts"
+    "start": "npx ts-node src/server/app.ts",
+    "trash": "npx trash-cli ./dist",
+    "prebuild": "npx cpx \"./src/client/**/*.{html,png,jpg,css}\" \"./dist/client\"",
+    "build": "npx tsc --build ./tsconfig.deploy-client.json &  npx tsc --build ./tsconfig.deploy-server.json",
+    "start-deploy": "cd dist & node ./server/app.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -22,7 +26,9 @@
     "@types/jsonwebtoken": "^9.0.2",
     "@types/multer": "^1.4.7",
     "@types/node": "^18.14.6",
+    "cpx": "^1.5.0",
     "nodemon": "^2.0.21",
+    "trash-cli": "^5.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.5"
   },

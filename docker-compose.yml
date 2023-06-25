@@ -1,0 +1,7 @@
+services:
+  pepper-core:
+    image: pepper-core
+    ports:
+      - 3001:3000
+    volumes:
+      - ./server-db/:/app/db

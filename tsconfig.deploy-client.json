@@ -1,0 +1,13 @@
+{
+  "exclude": ["src/server"],
+  "compilerOptions": {
+    "target": "es2021", // Set the JavaScript language version for emitted JavaScript and include compatible library declarations.
+    "module": "esnext", // Specify what module code is generated.
+    "moduleResolution": "nodenext",
+    "strict": true, // Enable all strict type-checking options.
+    "sourceMap": false, // Create source map files for emitted JavaScript files.
+    "strictNullChecks": false, // When type checking, dont't take into account null and undefined
+    "outDir": "./dist/client/",
+    "rootDir": "./src/client"
+  }
+}
