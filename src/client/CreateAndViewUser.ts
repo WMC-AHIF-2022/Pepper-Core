@@ -1,5 +1,6 @@
 import { fetchRestEndpoint } from "./utils/client-server.js";
 import {File} from "buffer";
+import {Picture} from "../server/data/picture";
 const btnCreate = document.getElementById("createUserButton");
 const elementFirstName = document.getElementById("inputFirstName")  as HTMLInputElement;
 const elementLastName = document.getElementById("inputLastName")  as HTMLInputElement;
@@ -17,7 +18,7 @@ const deleteProfilePicture = document.getElementById("deleteProfilePicture") as 
 const deleteMemoryPictures = document.getElementById("deleteMemoryPictures") as HTMLButtonElement;
 logoutBtn.addEventListener("click", function () {
     sessionStorage.clear();
-    window.location.href = "index.html";
+    window.location.href = "../../index.html";
 });
 if (sessionStorage.getItem("user-name") !== null) {
     const user = await fetchRestEndpoint(`/api/personUser/${sessionStorage.getItem("user-name")}`, "GET").then(r => r.json());
@@ -95,7 +96,18 @@ fileInputMore.addEventListener("change", async function () {
     }
 });
 btnCreate.addEventListener("click", async function () {
-    if (elementFirstName.value !== "" && elementLastName.value !== "" && elementBirthdate.value !== "" && elementGender.value !== "" && fileInputMore.files.length === 4 && fileInput.files.length === 1) {
+    let pics = false;
+    try{
+        const profilePicture = await fetchRestEndpoint(`/api/pictures/profilePicture/${sessionStorage.getItem("user-name")}`, "GET").then(r => r.json());
+        console.log(profilePicture);
+        const pic = await fetchRestEndpoint(`/api/pictures/memoryPictures/${sessionStorage.getItem("user-name")}`, "GET").then(r => r.json());
+        console.log(pic);
+        pics = true;
+    }
+    catch (Exception){
+
+    }
+    if (elementFirstName.value !== "" && elementLastName.value !== "" && elementBirthdate.value !== "" && elementGender.value !== "" && pics === true) {
         alert("Your Person has been created/edited");
         await createUser();
         if (fileInputMore.files.length === 4 || fileInput.files.length === 1) {
